@@ -1,0 +1,80 @@
+<div class="container">
+
+
+<h1 class="title">Users</h1>
+
+<div class="level">
+  <div class="level-left">
+    <%= link_to 'Add User', new_user_path, class: 'button is-primary is-outlined' %>
+  </div>
+  <div class="level-right">
+    <%= form_tag(users_path, method: :get) do %>
+    <div class="field is-grouped">
+      <%= render partial: 'layouts/form_helpers/per_page_dropdown' %>
+      <%= text_field_tag :search, params[:search], placeholder: 'Search by first or last name, or email', class: 'input', style:'width: 410px' %>
+      <%= submit_tag "Search", class: 'button is-info' %>
+    </div>
+    <% end %>
+    </div>
+  </div>
+
+<table class="table is-striped is-fullwidth is-hoverable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Last Login</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.first_name %> <%= user.last_name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.phone %></td>
+        <td><%= user.last_login_at %></td>
+        <td>
+          <%= link_to user do %>
+            <span class="icon has-text-info">
+              <i class="far fa-id-card"></i>
+            </span>
+          <% end %>
+        </td>
+        <td>
+          <% if user.is_admin? %>
+            <% if user.id == current_user.id %>
+              <%= link_to edit_user_path(user) do %>
+                <span class="icon has-text-info">
+                    <i class="fas fa-user"></i>
+                </span>
+              <% end %>
+            <% else %>
+            <span class="icon has-text-info">
+                <i class="fas fa-lock"></i>
+            </span>
+            <% end %>
+          <% end %>
+          <%= link_to edit_user_path(user) do %>
+            <span class="icon has-text-info">
+                <i class="fas fa-edit"></i>
+            </span>
+          <% end unless user.is_admin? %>
+        </td>
+        <td>
+          <%= link_to user, method: :delete, data: { confirm: 'Are you sure?' } do%>
+            <span class="icon has-text-danger">
+              <i class="fas fa-trash-alt"></i>
+            </span>
+          <% end unless user.is_admin? %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @temp_athletes, renderer: BulmaPagination::Rails, class: 'is-centered is-small is-rounded' %>
+
+</div>

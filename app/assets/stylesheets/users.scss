@@ -1,0 +1,45 @@
+.request-access{
+  .group{
+    margin-bottom: 30px;
+  }
+
+  .require-access-button{
+    padding-left: 20%;
+    padding-right: 20%;
+    margin-bottom: 50px;
+  }
+
+  .login-link{
+    color: $grey-text
+  }
+}
+
+.success{
+  .successful-text{
+    color: $grey-text;
+    margin-bottom: 50px;
+  }
+
+  .visit-website-button{
+    padding-left: 20%;
+    padding-right: 20%;
+    margin-bottom: 50px;
+  }
+
+  .link-text{
+    color: $grey-text;
+  }
+}
+
+.user-profile{
+  width: 257px;
+  height: 200px;
+  background-color: #fff;
+  position: absolute;
+  bottom: 30px;
+  left: 50px;
+}
+
+.stay-open.show{
+  opacity: 1;
+}

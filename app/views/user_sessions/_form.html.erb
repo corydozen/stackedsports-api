@@ -1,0 +1,45 @@
+<a class="button is-large is-info is-centered is-outlined twitter-login">
+  <span class="icon is-medium">
+    <%= icon('fab', 'twitter', class: 'fa-lg', title: '') %>
+  </span>
+  <span>LOGIN WITH TWITTER</span>
+</a>
+
+<div class="is-divider" data-content="OR"></div>
+
+<%= form_tag user_sessions_path, method: :post do %>
+
+<div class="field">
+  <p class="control has-icons-left">
+    <%= email_field_tag :email, nil, class: 'input is-large', placeholder: "your@email.com", required: true %>
+    <span class="icon is-small is-left">
+      <%= icon('fal', 'user', class: 'fa-lg', title: '') %>
+    </span>
+  </p>
+</div>
+
+<div class="field">
+  <p class="control has-icons-left">
+    <%= password_field_tag :password, nil, class: 'input is-large', placeholder: "*******", required: true %>
+    <span class="icon is-small is-left">
+      <%= icon('fal', 'key', class: 'fa-lg', title: '') %>
+    </span>
+  </p>
+</div>
+
+<div class="has-text-right is-size-4 forget-password">
+  <%= link_to 'Forgot Password?', reset_password_path, class: 'grey-link' %>
+</div>
+<div class="is-clearfix submit-row">
+  <div class="field is-pulled-left remember-me">
+    <%= check_box_tag :remember, params[:remember], true, class: 'is-checkradio is-info' %>
+    <!-- <input class="is-checkradio" id="exampleCheckbox" type="checkbox" name="exampleCheckbox" checked="checked"> -->
+    <label for="remember">Remember me</label>
+  </div>
+  <%= submit_tag "LOGIN", class: 'button is-medium is-info is-rounded is-pulled-right login-button' %>
+</div>
+<div class="reg-link">
+  Don't have an account?
+  <a href="/request_access">Request Access</a>
+</div>
+<% end %>

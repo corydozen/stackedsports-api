@@ -1,0 +1,33 @@
+<%= form_with(model: conference, local: true) do |form| %>
+  <% if conference.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(conference.errors.count, "error") %> prohibited this conference from being saved:</h2>
+
+      <ul>
+      <% conference.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name, class: 'label' %>
+    <%= form.text_field :name, class: 'input'%>
+  </div>
+
+  <div class="field">
+    <%= form.label :is_power_five, class: 'label' %>
+    <%= form.check_box :is_power_five, class: 'checkbox'%>
+  </div>
+
+  <div class="field">
+    <%= form.label :sort, class: 'label' %>
+    <sup>*Conferences with a sort of 999999 will be sorted by name when rendered</sup>
+    <%= form.number_field :sort, class: 'input'%>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class:'button is-primary' %>
+  </div>
+<% end %>

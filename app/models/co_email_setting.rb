@@ -1,0 +1,2 @@
+class CoEmailSetting < ApplicationRecord
+end

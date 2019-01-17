@@ -1,0 +1,52 @@
+<div class="ui grid main">
+    <div class="columns columns-login-screen">
+        <div class="column left">
+            <div class="left-content">
+                <img src="/images/logo.png" alt="logo" class="reset-password-screen-logo">
+                <div class="content">
+                  <div class="login-form">
+                    <form>
+                      <%= form_tag password_resets_path, method: :post do %>
+                        <div class="field">
+                          <div class="control">
+                            <div class="input-left-icon">
+                              <i class="fas fa-user email-left-icon"></i>
+                            </div>
+                            <%= label_tag @user.email, nil, class: 'input input-field', placeholder: "email" %>
+                          </div>
+                        </div>
+                        Create new password
+                        <div class="field">
+                          <div class="control">
+                            <div class="input-left-icon">
+                              <i class="fas fa-key email-left-icon"></i>
+                            </div>
+                            <%= password_field_tag :password, nil, class: 'input input-field', placeholder: "New password", required: true %>
+                          </div>
+                        </div>
+                        <div class="field">
+                          <div class="control">
+                            <div class="input-left-icon">
+                              <i class="fas fa-key email-left-icon"></i>
+                            </div>
+                            <%= password_field_tag :password_confirmation, nil, class: 'input input-field', placeholder: "Confirm new password", required: true %>
+                          </div>
+                        </div>
+                        <br>
+                        <%= submit_tag "RESET", class: 'button is-info reset-access-button' %>
+                      <% end %>
+                      <div class="back-link">
+                        <%= link_to 'Back', login_path, class: "back-link-path" %>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="column right">
+          <div class="phone-wrap">
+            <img src="/images/phone.png" alt="phone" class="phone">
+          </div>
+        </div>
+    </div>
+</div>

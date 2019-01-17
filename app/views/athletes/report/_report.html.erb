@@ -1,0 +1,26 @@
+<% show_header = true if local_assigns[:show_header].nil? %>
+<% content_for :head do %>
+  <meta name="turbolinks-cache-control" content="no-cache">
+<% end %>
+
+<%= render 'athletes/report/header', show_header: show_header %>
+
+<%= render 'athletes/report/profile_info' %>
+
+<%= render 'athletes/report/our_team_engagement' %>
+
+<%= render 'athletes/report/athlete_stats' %>
+
+<div class="charts">
+
+  <%= render 'athletes/report/program_engagement' %>
+
+  <%= render 'athletes/report/coach_engagement', items: items %>
+
+  <%= render 'athletes/report/sentiment' %>
+</div>
+
+<% tweet_content = AthleteReport.tweet_content(@athlete.athlete) %>
+<%= render 'athletes/report/questionable_content', qc: tweet_content[:questionable_tweets], ql:tweet_content[:questionable_likes], items: items, tweet_items: tweet_items %>
+
+<%= render 'athletes/report/recruiting_content', commits: tweet_content[:commits], offers: tweet_content[:offers], cvt: tweet_content[:camp_visits], items: items, tweet_items: tweet_items %>

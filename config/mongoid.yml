@@ -1,0 +1,41 @@
+development:
+# Configure available database sessions. (required)
+  clients:
+    default:
+      # hosts:
+      #   - localhost:27017
+      # database: RecruitSuite
+      uri: <%= "#{ENV['MONGO_URL']}" %>
+      options:
+        consistency: :strong
+        max_retries: 30
+        retry_interval: 1
+        timeout: 15
+test:
+  clients:
+    default:
+      # database: my_pm_app_test
+      # hosts:
+        # - localhost:27017
+      uri: <%= "#{ENV['MONGO_URL']}" %>
+      options:
+        read: primary
+        # In the test environment we lower the retries and retry interval to
+        # low amounts for fast failures.
+        max_retries: 1
+        retry_interval: 0
+production:
+  # Configure available database sessions. (required)
+  clients:
+    default:
+      # The standard MongoDB connection URI allows for easy replica set
+      # connection setup.
+      # Use environment variables or a config file to keep your
+      # credentials safe.
+      uri: <%= "#{ENV['MONGO_URL']}" %>
+      options:
+        # The default consistency is :eventual, which reads from
+        # secondaries when possible.
+        # Strong forces reads to primary.
+        # We recommend using strong consistency.
+        consistency: :strong

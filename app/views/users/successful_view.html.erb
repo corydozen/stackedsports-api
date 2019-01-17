@@ -1,0 +1,24 @@
+<% form =  '
+<div class="success">
+  <div class="text successful-text">
+      <p>
+          Thanks you for your interest in joining RecruitSuite,
+          the most efficient tool for recuiting on social media
+      </p>
+      <p>
+          We are currently reviewing your request. We will
+          contact you in next 24 hours regarding next steps.
+      </p>
+  </div>
+
+  <a href="https://www.stackedsports.com" class="button is-info is-rounded visit-website-button">VISIT WEBSITE</a>
+  <br>
+
+  <span class="link-text">Already have an account? <a href="/login"> Login here </a></span>
+</div>
+'
+%>
+
+
+
+<%= render template: 'layouts/login_access_form_container', locals: { form: form } %>

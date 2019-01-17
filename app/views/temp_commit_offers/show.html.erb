@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Program name:</strong>
+  <%= @temp_commit_offer.program_name %>
+</p>
+
+<p>
+  <strong>Recruit name:</strong>
+  <%= @temp_commit_offer.recruit_name %>
+</p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @temp_commit_offer.position %>
+</p>
+
+<p>
+  <strong>Grad year:</strong>
+  <%= @temp_commit_offer.grad_year %>
+</p>
+
+<p>
+  <strong>High school:</strong>
+  <%= @temp_commit_offer.high_school %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @temp_commit_offer.state %>
+</p>
+
+<p>
+  <strong>Twitter handle:</strong>
+  <%= @temp_commit_offer.twitter_handle %>
+</p>
+
+<p>
+  <strong>Tweet text:</strong>
+  <%= @temp_commit_offer.tweet_text %>
+</p>
+
+<p>
+  <strong>Tweet permalink:</strong>
+  <%= @temp_commit_offer.tweet_permalink %>
+</p>
+
+<p>
+  <strong>Deleted:</strong>
+  <%= @temp_commit_offer.deleted %>
+</p>
+
+<%= link_to 'Edit', edit_temp_commit_offer_path(@temp_commit_offer) %> |
+<%= link_to 'Back', temp_commit_offers_path %>

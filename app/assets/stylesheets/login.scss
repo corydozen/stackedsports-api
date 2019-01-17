@@ -1,0 +1,69 @@
+@import "vars";
+
+.login {
+  .main {
+    .logo {
+      margin-bottom: 70px;
+    }
+
+    .left {
+      .left-content {
+        padding-top: 100px;
+
+        .content {
+          max-width: 75%;
+          margin-left: auto;
+          margin-right: auto;
+
+          .twitter-login {
+            width: 100%;
+            margin-bottom: 25px;
+          }
+
+          .is-divider {
+            margin-bottom: 50px;
+          }
+
+          .forget-password {
+            margin-bottom: 40px;
+          }
+
+          .submit-row {
+            margin-bottom: 10px;
+
+            .remember-me {
+              label {
+                color: $grey-text;
+              }
+            }
+
+            .login-button {
+              padding-left: 12%;
+              padding-right: 12%;
+            }
+          }
+
+          .reg-link {
+            color: #4A4A4A;
+          }
+        }
+      }
+    }
+
+    .right {
+      background-image: image-url("login_background_image.png");
+      background-size: cover;
+      background-position: center center;
+      overflow: hidden;
+      position: relative;
+
+      .phone-wrap {
+        text-align: center;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -150px;
+      }
+    }
+  }
+}

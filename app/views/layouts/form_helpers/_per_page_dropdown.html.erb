@@ -1,0 +1,10 @@
+<% ## TODO: make this Display inline %>
+<div class="field is-horizontal" style="margin-right: 10px;">
+  <div class="field-label is-normal">
+    <label class="label">Results per page:</label>
+  </div>
+    <div class="select">
+      <% selected_value = params[:per_page] || 10 %>
+      <%= select_tag :per_page, options_for_select([10, 25, 50, 100, 'ALL'], selected: selected_value, prompt: 'Per Page') %>
+    </div>
+</div>

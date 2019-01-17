@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  event_type: MyString
+  direction: MyString
+  from: MyString
+  to: MyString
+  message_id: MyString
+  message_uri: MyString
+  text: MyString
+  application_id: MyString
+  time: 2018-11-28 16:30:52
+  state: MyString
+  delivery_state: MyString
+  delivery_code: MyString
+  delivery_description: MyString
+  media: MyString
+
+two:
+  event_type: MyString
+  direction: MyString
+  from: MyString
+  to: MyString
+  message_id: MyString
+  message_uri: MyString
+  text: MyString
+  application_id: MyString
+  time: 2018-11-28 16:30:52
+  state: MyString
+  delivery_state: MyString
+  delivery_code: MyString
+  delivery_description: MyString
+  media: MyString

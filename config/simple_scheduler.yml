@@ -1,0 +1,39 @@
+# Global configuration options. The `queue_ahead` and `tz` options can also be set on each task.
+queue_ahead: 360 # 6 hours # Number of minutes to queue jobs into the future
+queue_name: "critical" # The Sidekiq queue name used by SimpleScheduler::FutureJob
+tz: "America/Chicago" # The application time zone will be used by default if not set
+
+
+# Runs once every 1 minutes
+process_dm_queue:
+  class: "TwitterDMQueueJob"
+  every: "1.minutes"
+
+process_sms_queue:
+  class: "SmsQueueJob"
+  every: "1.minutes"
+
+check_media_status:
+  class: "MediaStatusUpdaterJob"
+  every: "1.minutes"
+
+upload_boards:
+  class: 'BoardUploadJob'
+  every: "1.minutes"
+
+get_temp_athletes:
+  class: 'GetTempAthletesJob'
+  every: "3.hours"
+
+get_tweets:
+  class: 'GetTweetsJob'
+  every: "1.hour"
+
+get_offers_commits:
+  class: 'GetOffersCommitsJob'
+  every: "2.hours"
+
+get_followers:
+  class: 'GetFollowersJob'
+  every: "1.day"
+  at: "0:00"

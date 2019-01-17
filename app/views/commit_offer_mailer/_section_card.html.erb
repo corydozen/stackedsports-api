@@ -1,0 +1,48 @@
+<tr style="background-color: #25313D; color: #fff;">
+  <td style="padding: 20px 0px 0px 0px;
+  -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;">
+    <div style="padding: 0px 0px 20px 0px;">
+      <span style="font-size: 18px;font-weight: bold;"><%= co_data.recruit_name %></span>
+      <br>
+      <span style="color: #95948E;font-size: 14px;"><%= program_label %>:</span>
+      <%= co_data.program_name %>
+    </div>
+  </td>
+</tr>
+<tr style="background-color: #25313D; color: #fff; padding: 20px; border-radius: 5px; padding: 0px 0px 20px 0px;">
+  <td >
+    <div style="padding: 0px 0px 20px 0px;">
+      <span style="color: #95948E;font-size: 14px;">Graduation Year:</span>
+      <%= co_data.grad_year %>
+      <span style="color: #95948E;font-size: 14px;">Pos:</span>
+      <%= co_data.position %>
+      <br>
+      <span style="color: #95948E;font-size: 14px;">High School:</span>
+      <%= co_data.high_school %>
+      <span style="color: #95948E;font-size: 14px;">State:</span>
+      <%= co_data.state %>
+    </div>
+  </td>
+</tr>
+<tr style="background-color: #25313D; color: #fff; ">
+  <td style="padding: 0px 0px 20px 0px;
+    -moz-border-radius-bottomleft: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;">
+    <div style="padding: 0px 5px 0px 5px;">
+      <span style="color: #95948E;font-size: 14px;">Source:</span>
+      <%= link_to "View tweet", co_data.tweet_permalink %>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td style="padding: 0px 0px 20px 0px;"></td>
+</tr>

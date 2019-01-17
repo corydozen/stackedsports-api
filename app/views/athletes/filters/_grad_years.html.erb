@@ -1,0 +1,15 @@
+<div class="columns is-multiline is-mobile grad-years">
+  <!-- List 6 years -->
+  <div class="column is-12 header">
+    Grad Year
+  </div>
+
+  <% @years.each do |year, count| %>
+    <div class="column field">
+      <%= check_box_tag 'years[]', year, false, id: "year_#{year}", class: 'year filter is-checkradio  is-info', data: {  url: athlete_filter_path, method: :post, year: year } %>
+      <label for="year_<%= year %>">
+        <%= "#{year} (#{count})" %>
+      </label>
+    </div>
+  <% end %>
+</div>

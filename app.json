@@ -1,0 +1,167 @@
+{
+  "name": "stackedsports-api",
+  "scripts": {
+    "postdeploy": "OK_TO_SEED=true bundle exec rails db:schema:load db:seed DISABLE_DATABASE_ENVIRONMENT_CHECK=1; bundle exec rake create_standard_0_database && bundle exec rake db:migrate && bundle exec rake orgs:add_football_team;"
+  },
+  "env": {
+    "API_KEY_FOR_HEROKU": {
+      "required": true
+    },
+    "AWS_ACCESS_KEY_ID": {
+      "required": true
+    },
+    "AWS_REGION": {
+      "required": true
+    },
+    "AWS_SECRET_ACCESS_KEY": {
+      "required": true
+    },
+    "ENVIRONMENT": {
+      "required": true,
+      "value": "dev"
+    },
+    "FOREST_AUTH_SECRET": {
+      "required": true
+    },
+    "FOREST_ENV_SECRET": {
+      "required": true
+    },
+    "HEROKU_APP_NAME": {
+      "required": true
+    },
+    "HEROKU_PARENT_APP_NAME": {
+      "required": true
+    },
+    "HEROKU_POSTGRESQL_CYAN_URL": {
+      "required": true
+    },
+    "key": {
+      "required": true
+    },
+    "LANG": {
+      "required": true
+    },
+    "LIBRATO_PASSWORD": {
+      "required": true
+    },
+    "LIBRATO_TOKEN": {
+      "required": true
+    },
+    "LIBRATO_USER": {
+      "required": true
+    },
+    "MAILCHIMP_CO_API_KEY": {
+      "required": true
+    },
+    "MONGO_URL": {
+      "required": true
+    },
+    "NEW_RELIC_LICENSE_KEY": {
+      "required": true
+    },
+    "NEW_RELIC_LOG": {
+      "required": true
+    },
+    "PAPERTRAIL_API_TOKEN": {
+      "required": true
+    },
+    "RACK_ENV": {
+      "required": true
+    },
+    "RAILS_ENV": {
+      "required": true
+    },
+    "RAILS_LOG_TO_STDOUT": {
+      "required": true
+    },
+    "RAILS_MASTER_KEY": {
+      "required": true
+    },
+    "RAILS_MAX_DB_THREADS": {
+      "required": true,
+      "value": "120"
+    },
+    "RAILS_SERVE_STATIC_FILES": {
+      "required": true
+    },
+    "REDIS_URL": {
+      "required": true
+    },
+    "REDISCLOUD_URL": {
+      "required": true
+    },
+    "ROLLBAR_ACCESS_TOKEN": {
+      "required": true
+    },
+    "ROLLBAR_ENDPOINT": {
+      "required": true
+    },
+    "RS_TWITTER_API_KEY": {
+      "required": true
+    },
+    "RS_TWITTER_API_SECRET": {
+      "required": true
+    },
+    "S3_BUCKET_NAME": {
+      "required": true
+    },
+    "SECRET_KEY_BASE": {
+      "required": true
+    },
+    "SENDGRID_PASSWORD": {
+      "required": true
+    },
+    "SENDGRID_USERNAME": {
+      "required": true
+    },
+    "SIDEKIQ_CONCURRENCY": {
+      "required": true
+    },
+    "SIDEKIQ_PASSWORD": {
+      "required": true
+    },
+    "SIDEKIQ_USERNAME": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "standard-1x"
+    },
+    "sms_worker": {
+      "quantity": 1,
+      "size": "standard-1x"
+    },
+    "twitter_dm_worker": {
+      "quantity": 1,
+      "size": "standard-1x"
+    },
+    "twitter_jobs_worker": {
+      "quantity": 1,
+      "size": "standard-1x"
+    },
+    "worker": {
+      "quantity": 1,
+      "size": "standard-1x"
+    }
+  },
+  "addons": [
+    "librato",
+    "newrelic",
+    "papertrail",
+    "heroku-postgresql",
+    "rediscloud",
+    "rollbar",
+    "scheduler",
+    "sendgrid"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    },
+    {
+      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git"
+    }
+  ]
+}

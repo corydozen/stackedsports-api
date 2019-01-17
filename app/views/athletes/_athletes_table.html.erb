@@ -1,0 +1,83 @@
+<div id="athlete-table">
+<table class="athlete-list-table table is-narrow is-striped is-fullwidth ">
+<%#= render 'tags_section' %>
+  <thead>
+
+    <tr>
+      <th></th>
+      <th></th>
+      <th><%= sort_link "first_name", "First Name" %></th>
+      <th><%= sort_link "last_name", "Last Name" %></th>
+      <th colspan="2"></th>
+      <th>Twitter</th>
+      <th>Phone Number</th>
+      <th>Last messaged</th>
+      <th>Last Report</th>
+      <th>Most Active Day</th>
+      <th>Most Active Time</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @athletes.each do |athlete| %>
+      <tr>
+      <% twitter_profile = athlete.is_a?(Athlete) ? athlete.twitter_profile : athlete.athlete.twitter_profile  %>
+      <% last_messaged = athlete.is_a?(Athlete) ? athlete.last_messaged(current_user) : athlete.athlete.last_messaged(current_user) %>
+      <% most_active_day = athlete.is_a?(Athlete) ? athlete.most_active_day : athlete.athlete.most_active_day %>
+      <% most_active_time = athlete.is_a?(Athlete) ? athlete.most_active_time(_time_zone: cookies['browser.timezone']) : athlete.athlete.most_active_time(_time_zone: cookies['browser.timezone']) %>
+      <% last_report = athlete.is_a?(Athlete) ? athlete.last_report : athlete.athlete.last_report %>
+
+      <td><%= render 'layouts/notification_dot', color: 'red', size: 'small', centered: true, count: nil %></td>
+      <td>
+        <%= link_to athlete_path(athlete), class: 'white-link' do %>
+          <figure class="image is-48x48">
+            <%= image_tag twitter_profile.profile_image, class: 'is-rounded' %>
+          </figure>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to athlete_path(athlete), class: 'white-link' do %>
+        <%= athlete.first_name %>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to athlete_path(athlete), class: 'white-link' do %>
+        <%= athlete.last_name %>
+        <% end %>
+      </td>
+      <td></td>
+      <td></td>
+      <td>
+        <%= link_to '#', class: 'white-link twitter_screen_name' do  %>
+          <%= twitter_profile.screen_name %>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to '#', class: 'white-link sms_number' do  %>
+          <%= number_to_phone(athlete.phone, area_code: true, delimiter: '.')  %>
+        <% end %>
+      </td>
+      <td><%= last_messaged.present? ? time_ago_in_words(last_messaged) : 'Never' %></td>
+      <td><%= last_report.present? ? time_ago_in_words(last_report) : 'Unknown' %></td>
+      <td><%= most_active_day %></td>
+      <td><%= most_active_time %></td>
+    </tr>
+  <% end %>
+</tbody>
+</table>
+
+<div id="infinite-scrolling">
+  <%= will_paginate @athletes, renderer: BulmaPagination::Rails, class: 'is-centered is-small is-rounded' %>
+</div>
+</div>
+
+<script type="text/javascript">
+  $( document ).on('ready', function() {
+    bulmaTagsinput.attach();
+    // Adding some synamic styles to will_paginate
+    $('.pagination-previous > a').addClass('white-link');
+    $('.pagination-next > a').addClass('white-link');
+    $('.pagination-link').addClass('white-link');
+    $('thead > tr > th > a').addClass('white-link');
+  });
+</script>

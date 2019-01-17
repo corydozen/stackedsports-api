@@ -1,0 +1,37 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  phone: MyString
+  email: MyString
+  nick_name: MyString
+  graduation_year: MyString
+  high_school: MyString
+  state: MyString
+  coach_name: MyString
+  mothers_name: MyString
+  fathers_name: MyString
+  hudl_id: MyString
+  arms_id: MyString
+  twitter_profile_id: MyString
+  instagram_id: MyString
+  team: one
+
+two:
+  first_name: MyString
+  last_name: MyString
+  phone: MyString
+  email: MyString
+  nick_name: MyString
+  graduation_year: MyString
+  high_school: MyString
+  state: MyString
+  coach_name: MyString
+  mothers_name: MyString
+  fathers_name: MyString
+  hudl_id: MyString
+  arms_id: MyString
+  twitter_profile_id: MyString
+  instagram_id: MyString
+  team: two

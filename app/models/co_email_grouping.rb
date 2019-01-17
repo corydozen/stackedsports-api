@@ -1,0 +1,2 @@
+class CoEmailGrouping < ApplicationRecord
+end

@@ -1,0 +1,93 @@
+<% if current_user.is_admin? %>
+<nav class="navbar is-transparent is-fixed-top">
+  <div class="navbar-brand">
+      <%= link_to dashboard_path, class:'navbar-item' do %>
+        <img src="https://s3.us-east-2.amazonaws.com/stakdsocial/media/general/stacked_sports_glyph_inverted.png" alt="Stacked Sports" width="112" height="28">
+      <% end %>
+    <div class="navbar-burger burger" data-target="navbarTransparent">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div id="navbarTransparent" class="navbar-menu">
+    <div class="navbar-start">
+      <% if logged_in? %>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link" href="#">
+          User Management
+        </a>
+        <div class="navbar-dropdown is-boxed">
+          <%= link_to 'Conferences', conferences_path, class: 'navbar-item' %>
+          <%= link_to 'Organizations', organizations_path, class: 'navbar-item' %>
+          <%= link_to 'Teams', teams_path, class: 'navbar-item' %>
+          <%= link_to 'Users', users_path, class: 'navbar-item' %>
+        </div>
+      </div>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link" href="#">
+          Commit/Offer Emails
+        </a>
+        <div class="navbar-dropdown is-boxed">
+          <%= link_to 'Athletes', temp_athletes_path, class: 'navbar-item' %>
+
+          <%= link_to 'Email Groupings', co_email_groupings_path, class: 'navbar-item' %>
+          <hr class="navbar-divider">
+          <%= link_to 'Commit/Offer Email Content', temp_commit_offers_path, class: 'navbar-item' %>
+        </div>
+      </div>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link" href="#">
+          Board Management
+        </a>
+        <div class="navbar-dropdown is-boxed">
+          <%= link_to 'Board Uploads', board_uploads_path, class: 'navbar-item' %>
+          <hr class="navbar-divider">
+          <%= link_to 'Delete All Boards for User', '#', class: 'navbar-item' %>
+          <%= link_to 'Delete All Athletes for User', '#', class: 'navbar-item' %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="navbar-end">
+      <%= render 'layouts/admin_flash_messages' %>
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <% unless logged_in? || request.original_url.include?('login') %>
+          <p class="control">
+            <a class="button" href="<%= login_path %>">
+              <span class="icon">
+                <i class="fas fa-sign-in-alt"></i>
+              </span>
+              <span>
+                Log in
+              </span>
+            </a>
+          </p>
+          <% end %>
+          <% if logged_in? %>
+          <p class="control">
+            <%= link_to logout_path, method: :post, class:'button'  do %>
+
+              <span class="icon">
+                <i class="fas fa-sign-out-alt"></i>
+              </span>
+              <span>
+                Log Out
+              </span>
+
+            <% end %>
+          </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</nav>
+
+<% end %>

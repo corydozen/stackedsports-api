@@ -1,0 +1,13 @@
+.nested-child-list {
+  padding-left: 20px;
+  list-style-type: lower-alpha;
+
+  .nested-grandchild-list {
+    padding-left: 20px;
+    list-style-type: lower-roman;
+
+    .nested-great-grandchild-list {
+      padding-left: 20px;
+    }
+  }
+}

@@ -1,0 +1,238 @@
+<%= form_with(model: athlete, local: true, id: 'new_athlete_form') do |form| %>
+
+<div class="group-margin">
+
+  <div class="field">
+    <div class="swap-order">
+      <%= form.text_field :last_name, class: 'input', placeholder: 'Last name' %>
+      <%#= form.label :last_name %>
+      </div>
+    </div>
+
+    <div class="field is-horizontal">
+      <div class="field-body">
+        <div class="field">
+          <p class="control is-expanded">
+            <%= form.text_field :first_name, class: 'input', placeholder: 'First name' %>
+            <%#= form.label :first_name %>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control is-expanded">
+              <%= form.text_field :nick_name, class: 'input', placeholder: 'Nickname' %>
+              <%#= form.label :nick_name %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="group-margin">
+        <p class="has-text-grey form-text">AT LEAST ONE FORM OF COMMUNICATION IS REQUIRED IN ORDER TO CREATE AN ATHLETE PROFILE.</p>
+
+        <div class="control has-icons-right">
+          <%#= form.label :phone %>
+            <%= form.number_field :phone, class: 'input phone-search', placeholder: 'Phone Number' %>
+
+            <span class="icon is-small is-right">
+              <i class="fas fa-angle-double-right"></i>
+            </span>
+          </div>
+
+          <!-- <p class="has-text-grey form-text form-text-between-fields">AND/OR</p> -->
+          <div class="is-divider" data-content="AND/OR"></div>
+          <div class="field">
+            <div class="control has-icons-right">
+              <%#= form.label :twitter_profile_id %>
+                <%= form.text_field :twitter_search, class: 'input twitter-search', placeholder: 'Twitter Search' %>
+                <span class="icon is-small is-right">
+                  <i class="fas fa-angle-double-right"></i>
+                </span>
+              </div>
+            </div>
+
+            <div class="field is-grouped is-grouped-right actions">
+              <p class="control">
+                <button type="button" name="button" class="button is-small is-rounded is-outlined is-info close">CANCEL</button>
+              </p>
+              <p class="control">
+                <%= form.submit 'Save', id: 'save_athlete', class: 'button is-small is-rounded is-info', disabled: 'disabled' %>
+              </p>
+            </div>
+          </div>
+
+          <section class="accordions">
+            <div class="accordion is-info">
+              <div class="accordion-header toggle">
+                <p>DETAILS</p>
+                <div class="counts">
+                  ( 0 of 6 )
+                </div>
+                <button class="toggle" aria-label="toggle"></button>
+              </div>
+              <div class="accordion-body">
+                <div class="accordion-content">
+                  <div class="">
+                    <div class="field">
+                      <%#= form.label :email %>
+                        <%= form.text_field :email, class: 'input', placeholder: 'Email' %>
+                      </div>
+
+                      <div class="field">
+                        <%#= form.label :graduation_year %>
+                          <%= form.text_field :graduation_year, class: 'input', placeholder: 'Graduation Year' %>
+                        </div>
+
+                        <div class="field">
+                          <%#= form.label :high_school %>
+                            <%= form.text_field :high_school, class: 'input', placeholder: 'High School Name' %>
+                          </div>
+
+                          <div class="field">
+                            <%#= form.label :state %>
+                              <%= form.text_field :state, class: 'input', placeholder: 'High School State' %>
+                            </div>
+
+                            <div class="field">
+                              <%#= form.label :coach_name %>
+                                <%= form.text_field :coach_name, class: 'input', placeholder: "Coach's Name" %>
+                              </div>
+
+                              <div class="field">
+                                <%#= form.label :positions %>
+                                  <%= form.text_field :position, class: 'input', placeholder: 'Positions (in comma seaparated list)' %>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion is-info">
+                          <div class="accordion-header toggle">
+                            <p>FAMILY DETAILS</p>
+                            <div class="counts">
+                              ( 0 of 2 )
+                            </div>
+                            <button class="toggle" aria-label="toggle"></button>
+                          </div>
+                          <div class="accordion-body">
+                            <div class="accordion-content">
+                              <div class="">
+                                <div class="field">
+                                  <%#= form.label :mothers_name %>
+                                    <%= form.text_field :mothers_name, class: 'input', placeholder: "Mother's Name" %>
+                                  </div>
+
+                                  <div class="field">
+                                    <%#= form.label :fathers_name %>
+                                      <%= form.text_field :fathers_name, class: 'input', placeholder: "Father's Name" %>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="accordion is-info">
+                              <div class="accordion-header toggle">
+                                <p>EXTERNAL PROFILES</p>
+                                <div class="counts">
+                                  ( 0 of 2 )
+                                </div>
+                                <button class="toggle" aria-label="toggle"></button>
+                              </div>
+                              <div class="accordion-body">
+                                <div class="accordion-content">
+                                  <div class="">
+                                    <div class="field">
+                                      <%#= form.label :hudl_id %>
+                                        <%= form.text_field :hudl_id, class: 'input', placeholder: 'Hudl ID' %>
+                                      </div>
+
+                                      <div class="field">
+                                        <%#= form.label :arms_id %>
+                                          <%= form.text_field :arms_id, class: 'input', placeholder: 'Arms ID' %>
+                                        </div>
+
+                                        <!-- <div class="field"> <%#= form.label :instagram_id %> <%#= form.text_field :instagram_id %> </div> -->
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="accordion is-info">
+                                  <div class="accordion-header toggle">
+                                    <p>TAGS</p>
+                                    <button class="toggle" aria-label="toggle"></button>
+                                  </div>
+                                  <div class="accordion-body">
+                                    <div class="accordion-content">
+                                      <div class="">
+                                        Show tags here...
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </section>
+
+                              <%= form.hidden_field :athlete_id %>
+                              <%= form.hidden_field :twitter_id %>
+                              <%= form.hidden_field :follow_on_twitter %>
+                              <%= form.hidden_field :team_id, value: current_user.teams.first.id %>
+
+                              <% if athlete.errors.any? %>
+                                <div id="error_explanation">
+                                  <h2><%= pluralize(athlete.errors.count, "error") %>
+                                    prohibited this athlete from being saved:</h2>
+
+                                  <ul>
+                                    <% athlete.errors.full_messages.each do |message| %>
+                                      <li><%= message %></li>
+                                    <% end %>
+                                  </ul>
+                                </div>
+                              <% end %>
+                            <% end %>
+
+                            <script type="text/javascript">
+                              $( document ).ready(function() {
+                                var accordions = bulmaAccordion.attach();
+
+                                if(!$('.new-team-athlete.is-checkradio').is(':checked')){
+                                  $('#save_athlete').prop('disabled', true);
+                                }
+
+                                $('.phone-search, .twitter-search').on('input', function () {
+
+                                  var search_value = "";
+                                  var phone_value = $('.phone-search').val();
+                                  var twitter_value = $('.twitter-search').val();
+
+                                  if (phone_value.length >= 10) {
+                                    search_value = phone_value + ','
+                                  }
+
+                                  search_value = search_value + twitter_value
+
+                                  // Trim off leading or trailing comma
+                                  var firstChar = search_value.slice(0, 1);
+                                  if (firstChar == ',') {
+                                    search_value = search_value.slice(1);
+                                  }
+                                  var lastChar = search_value.slice(-1);
+                                  if (lastChar == ',') {
+                                    search_value = search_value.slice(0, -1);
+                                  }
+
+                                  if (search_value.length > 0) {
+                                    $('#new-athlete-modal .modal-card').width('75%');
+                                    $('.new-athlete-form').addClass('is-4 has-border-right');
+                                    $('.new-athlete-form').removeClass('is-12');
+                                    $('.new-athlete-search-results').show();
+                                    $('#athlete_search').val(search_value);
+                                    var elem = document.getElementById('new-athlete-search-form');
+                                    setTimeout(Rails.fire(elem, "submit"), 300);
+                                  } else {
+                                    $('#athlete_search').val(search_value);
+                                    var elem = document.getElementById('new-athlete-search-form');
+                                    Rails.fire(elem, "submit");
+                                  }
+                                });
+                              });
+                            </script>

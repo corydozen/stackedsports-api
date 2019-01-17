@@ -1,0 +1,32 @@
+<%= form_with(model: co_email_recipient, local: true) do |form| %>
+  <% if co_email_recipient.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(co_email_recipient.errors.count, "error") %> prohibited this co_email_recipient from being saved:</h2>
+
+      <ul>
+      <% co_email_recipient.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :full_name %>
+    <%= form.text_field :full_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :enabled %>
+    <%= form.check_box :enabled %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

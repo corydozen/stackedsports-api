@@ -1,0 +1,100 @@
+Daily Offer & Commit Tweets
+<% today = DateTime.now.to_date %>
+From <%= today.strftime("%B #{today.day.ordinalize}, %Y") %>
+Good morning!
+Here's a look at all the offers and commit tweets from yesterday.
+Brought to you by RecruitSuite powered by Stackedsports.com
+--------------------------------------------------------------------------------
+<% valid_records = TempCommitOffer.where(deleted: false) %>
+<% conferences = Conference.distinct.order(:name).pluck(:name) %>
+
+------------------------------ COMMIT TWEETS -----------------------------------
+<% conferences.each do |conference| %>
+<% commits = valid_records.where(grouping: 'Commit Tweets', conference: conference) %>
+<% next unless commits.present? %>
+
+                                  <% if conference.present? %>
+                                  <%= conference %>
+                                  <% else %>
+                                  No Conference
+                                  <% end %>
+                      ----------------------------------
+<% commits.each do |commit| %>
+<%= commit.recruit_name %>
+
+Program committed: <%= commit.program_name %>
+Graduation Year: <%= commit.grad_year %>
+Pos: <%= commit.position %>
+
+High School: <%= commit.high_school %>
+State: <%= commit.state %>
+
+Tweet: <%= commit.tweet_text %>
+<%= commit.tweet_permalink %>
+
+<% end %>
+<% end %>
+
+
+------------------------------- OFFER TWEETS -----------------------------------
+<% conferences.each do |conference| %>
+<% offers = valid_records.where(grouping: 'Offer Tweets', conference: conference) %>
+<% next unless offers.present? %>
+
+                                  <% if conference.present? %>
+                                  <%= conference %>
+                                  <% else %>
+                                  No Conference
+                                  <% end %>
+                      ----------------------------------
+<% offers.each do |offer| %>
+<%= offer.recruit_name %>
+
+Program committed: <%= offer.program_name %>
+Graduation Year: <%= offer.grad_year %>
+Pos: <%= offer.position %>
+
+High School: <%= offer.high_school %>
+State: <%= offer.state %>
+
+Tweet: <%= offer.tweet_text %>
+<%= offer.tweet_permalink %>
+<% end %>
+<% end %>
+
+
+----------------------------- OTHER COMMITMENTS --------------------------------
+<% conferences.each do |conference| %>
+<% others = valid_records.where(grouping: 'Other Commitments', conference: conference) %>
+<% next unless others.present? %>
+
+                                  <% if conference.present? %>
+                                  <%= conference %>
+                                  <% else %>
+                                  No Conference
+                                  <% end %>
+                      ----------------------------------
+<% others.each do |other| %>
+<%= other.recruit_name %>
+
+Program committed: <%= other.program_name %>
+Graduation Year: <%= other.grad_year %>
+Pos: <%= other.position %>
+
+High School: <%= other.high_school %>
+State: <%= other.state %>
+
+Tweet: <%= other.tweet_text %>
+<%= other.tweet_permalink %>
+<% end %>
+<% end %>
+
+
+
+How can RecruitSuite help me?<
+
+RecruitSuite is the most efficient tool for recruiting on social media.
+The only recruiting software that combines your social media communication,
+social data analytics, and social media content strategies in one tool.
+Complete the "Request A Demo" form found at http://stackedsports.com/schedule-a-demo/
+and we will personally show you how RecruitSuite can improve your social media strategy.

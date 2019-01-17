@@ -1,0 +1,2 @@
+class CoEmailRecipient < ApplicationRecord
+end

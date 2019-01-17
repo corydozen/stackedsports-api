@@ -1,0 +1,51 @@
+<div class="columns is-fullheight">
+  <div class="column is-3">
+    <aside class="menu">
+      <div class="menu-label logo">
+        <div class="icon">
+          <%= image_tag 'https://s3.us-east-2.amazonaws.com/stakdsocial/media/general/rs-logo.png' %>
+        </div>
+        <div class="logo-divider"></div>
+
+        <div class="menu-label <%= current_page?(athletes_path) ? 'active' : '' %> athlete-icon">
+          <%#= render 'layouts/user_nav/icon_container', icon: 'athlete-icon' %>
+          <%= link_to athletes_path, class: 'grey-link' do %>
+            <!-- <i class="far fa-running fa-2x icon" title="Athletes"></i> -->
+            <%= icon('far', 'running', class: 'fa-2x icon', title: 'Athletes') %>
+          <% end %>
+        </div>
+
+        <div class="menu-label <%#= current_page?(inbox_path) ? 'active' : '' %> inbox-icon">
+          <%#= render 'layouts/user_nav/icon_container', icon: 'inbox-icon' %>
+          <%= link_to inbox_path, class: 'grey-link' do %>
+            <!-- <i class="far fa-inbox fa-2x icon" title="Inbox"></i> -->
+            <%= icon('far', 'inbox', class: 'fa-2x icon', title: 'Inbox') %>
+          <% end %>
+        </div>
+
+        <div class="menu-label <%#= current_page?(media_path) ? 'active' : '' %> media-icon">
+          <%#= render 'layouts/user_nav/icon_container', icon: 'media-icon' %>
+          <%= link_to media_path, class: 'grey-link' do %>
+            <!-- <i class="far fa-image fa-2x icon" title="Media Library"></i> -->
+            <%= icon('far', 'image', class: 'fa-2x icon', title: 'Media Library') %>
+          <% end %>
+        </div>
+
+        <% if current_user.is_admin? %>
+        <div class="menu-label admin-icon">
+          <%#= render 'layouts/user_nav/icon_container', icon: 'athlete-icon' %>
+          <%= link_to admin_path, class: 'grey-link' do %>
+            <!-- <i class="far fa-tools fa-2x icon" title="Admin"></i> -->
+            <%= icon('far', 'tools', class: 'fa-2x icon', title: 'Admin') %>
+          <% end %>
+        </div>
+      <% end %>
+      
+      <%= render 'layouts/user_nav/search' %>
+      <%= render 'layouts/user_nav/footer' %>
+    </aside>
+  </div>
+  <div class="column is-9">
+    <%= render 'layouts/user_nav/sub_nav_container' %>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+
+<%= render 'email_templates/mso_table_wrapper_above' %>
+<table cellpadding="0" cellspacing="0" border="0" style="<%= render 'email_templates/table_style' %>width:100%;">
+  <tr>
+    <td style="padding: 0px 0px 20px 0px;">
+      <hr>
+    </td>
+    <td width="<%= width %>" style="padding: 0px 0px 20px 0px;">
+      <strong>
+        <span style="font-size: 20px;">
+        <%= header %>
+        </span>
+      </strong>
+    </td>
+    <td style="padding: 0px 0px 20px 0px;">
+      <hr>
+    </td>
+  </tr>
+</table>
+<%= render 'email_templates/mso_table_wrapper_below' %>

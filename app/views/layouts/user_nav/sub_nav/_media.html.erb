@@ -1,0 +1,28 @@
+<div class="sub-nav-media">
+  <div class="new-media">
+    <%= link_to "+ New Media", '#', {id: 'media-new-button'} %>
+  </div>
+  <div class="videos">
+    <%= link_to "Videos (#{@videos ? @videos.count : 0})", media_path(type: 'video'), class: 'white-link' %>
+  </div>
+  <div class="images">
+    <%= link_to "Images (#{@images ? @images.count : 0})", media_path(type: 'image'), class: 'white-link' %>
+  </div>
+  <div class="gifs">
+    <%= link_to "Gifs (#{@gifs ? @gifs.count : 0})", media_path(type: 'gif'), class: 'white-link' %>
+  </div>
+  <div class="my-media">
+    <%= link_to "My Media (#{@my_media ? @my_media.count : 0})", media_path(only_mine: true), class: 'white-link' %>
+  </div>
+  <div class="media-filters">
+    <div class="filter-label">
+      Saved Filters
+    </div>
+    <div class="links">
+      <!-- TODO: this should just be a loop over the users private boards -->
+      <%#= link_to "Camp", '#', class: 'white-link' %><br>
+      <%#= link_to "Personalized Jerseys", '#', class: 'white-link' %><br>
+      <%#= link_to "In the NFL", '#', class: 'white-link' %>
+    </div>
+  </div>
+</div>

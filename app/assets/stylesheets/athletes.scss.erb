@@ -1,0 +1,634 @@
+// Place all the styles related to the Athletes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "vars";
+$positive: #63A61F;
+$negative: #BC4749;
+$neutral: #96989A;
+$mixed: #616365;
+@mixin progress_color($color) {
+  progress {
+    background: $color;
+  }
+
+  progress::-webkit-progress-bar {
+    background: $color;
+  }
+
+  progress::-webkit-progress-value {
+    background: $color;
+  }
+
+  progress::-moz-progress-bar {
+    background: $color;
+  }
+}
+@mixin partial_bottom_border($percent) {
+  &:after {
+    content: "";
+    /* This is necessary for the pseudo element to work. */
+    display: block;
+    /* This will put the pseudo element on its own line. */
+    margin: 0 auto;
+    /* This will center the border. */
+    width: $percent;
+    /* Change this to whatever width you want. */
+    padding-top: 20px;
+    /* This creates some space between the element and the border. */
+    border-bottom: 1px solid $grey-text;
+    /* This creates the border. Replace black with whatever color you want. */
+  }
+}
+
+.is-positive {
+  color: $positive;
+}
+
+.is-negative {
+  color: $negative;
+}
+
+.is-neutral {
+  color: $neutral;
+}
+
+.is-mixed {
+  color: $mixed;
+}
+
+.is-positive-progress {
+  @include progress_color($positive);
+}
+
+.is-negative-progress {
+  @include progress_color($negative);
+}
+
+.is-neutral-progress {
+  @include progress_color($neutral);
+}
+
+.is-mixed-progress {
+  @include progress_color($mixed);
+}
+
+.athlete-list {
+  .section-header.athletes-list {
+    .athlete-search {
+      // margin-left: -240px;
+      form {
+        .search-submit {
+          position: relative;
+          left: 50px;
+          z-index: 1;
+          border: none;
+          background-color: #35434E;
+          color: #5E6972;
+        }
+
+        input {
+          text-indent: 50px;
+          background-color: #35434E;
+          border-color: #35434E;
+          color: #5E6972;
+
+          &::placeholder {
+            color: #5E6972;
+          }
+        }
+      }
+    }
+
+    .fa-filter, .hidden-filters {
+      margin-left: 20px;
+      color: #5E6972;
+      cursor: pointer;
+    }
+  }
+
+  .tags-section {
+    height: 100px;
+    background-color: $light-background;
+  }
+
+  .athlete-list-table {
+    // border-collapse:collapse;
+    color: $light-text;
+    background-color: $primary-background;
+
+    thead {
+      background-color: $light-background;
+
+      th {
+        color: $light-text;
+        border: none;
+      }
+    }
+
+    tbody {
+      background-color: $primary-background;
+
+      td {
+        color: $light-text;
+        border: none;
+        vertical-align: middle;
+
+        .twitter_screen_name {
+          cursor: url(<%= asset_url 'comment_icon_twitter.png' %>), auto;
+        }
+
+        .sms_number {
+          cursor: url(<%= asset_url 'sms_icon.png' %>), auto;
+        }
+      }
+    }
+  }
+
+  #infinite-scrolling {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .table.is-striped tbody tr:not(.is-selected):nth-child(even) {
+    background-color: $light-background;
+  }
+
+  .new-athlete-link {
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+  }
+
+  .has-border-right {
+    border-right: 1px solid whitesmoke;
+    padding-right: 0;
+  }
+
+  #new-athlete-modal {
+    color: #333;
+
+    .modal-card {
+      width: 25%;
+      overflow: hidden;
+
+      .modal-card-head {
+        background-color: #2A91C9;
+      }
+
+      .modal-card-body {
+        .new-athlete-form,
+        .new-athlete-search-results {
+          padding-top: 50px !important;
+        }
+
+        .new-athlete-form {
+          .form-text {
+            font-size: 12px;
+            margin-bottom: 10px;
+          }
+
+          .form-text-between-fields {
+            margin-top: 10px;
+          }
+
+          .actions {
+            margin-top: 40px;
+            margin-bottom: 20px;
+          }
+        }
+
+        .new-athlete-search-results {
+          .new-athlete-search {
+            #new-athlete-search-form {
+              margin-bottom: 25px;
+
+              .search-submit {
+                position: relative;
+                left: 20px;
+                top: 5px;
+                height: 25px;
+                z-index: 1;
+                border: none;
+                background-color: #fff;
+                color: #5E6972;
+              }
+
+              input {
+                text-indent: 50px;
+                background-color: #fff;
+                border-color: #35434E;
+                color: #5E6972;
+                left: -32px;
+
+                &::placeholder {
+                  color: #5E6972;
+                }
+              }
+            }
+
+            #athlete-search-results {
+              .search-results {
+                .athlete-results-header,
+                .twitter-results-header {
+                  margin-bottom: 25px;
+                }
+
+                .is-checkradio[type=checkbox].is-medium.is-block + label::after,
+                .is-checkradio[type=checkbox].is-medium.is-block + label:after {
+                  top: 0.4rem;
+                }
+
+                .athlete-result-list {
+                  background-color: #D8D8D8;
+                  border: 1px solid #333;
+                  margin-bottom: 20px;
+
+                  .athlete-result-item {
+                    padding: 10px;
+
+                    &:not(:last-child) {
+                      border-bottom: 1px solid whitesmoke;
+                    }
+                  }
+                }
+
+                .twitter-result-list {
+                  .twitter-result-item {
+                    padding: 10px;
+
+                    &:not(:last-child) {
+                      border-bottom: 1px solid whitesmoke;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.filters {
+  border: 1px solid #4C565E;
+  padding: 25px 35px 25px 25px;
+
+  .header {
+    width: 100%;
+    border-bottom: 1px solid rgba(151,151,151,0.15);
+  }
+
+  .grad-years,
+  .positions,
+  .states,
+  .tags {
+    opacity: 0.7;
+  }
+}
+
+.athlete {
+  // padding-top: 20px;
+  .athlete-profile {
+    background-color: $light-background;
+
+    p {
+      strong {
+        color: $white;
+      }
+    }
+
+    .accordions {
+      .accordion {
+        .accordion-header {
+          background-color: #2C3842;
+          color: #B9BCC0;
+          height: 75px;
+
+          .toggle {
+            font-family: 'Font Awesome 5 Pro';
+
+            &::before {
+              content: '\f105';
+            }
+          }
+        }
+
+        .is-active > .toggle {
+          font-family: 'Font Awesome 5 Pro';
+
+          ::before {
+            content: '\f107';
+          }
+        }
+
+        .accordion-body {
+          background-color: #2F3B46;
+          border: none;
+          color: $grey-text;
+        }
+      }
+    }
+  }
+
+  .athlete-conversation {
+    .msg {
+      width: 100%;
+      margin: 15px;
+
+      .profile-image {
+        max-width: 77px;
+
+        .fa-phone,
+        .fa-twitter {
+          // bottom: 20px;
+          position: relative;
+          // background-color: #3F4A54;
+        }
+
+        .fa-twitter {
+          color: $twitter;
+        }
+
+        .fa-phone {
+          color: $phone;
+        }
+      }
+
+      .inbound-message,
+      .outbound-message {
+        border-radius: 15px;
+      }
+
+      .inbound-message {
+        background-color: #3F4A54;
+      }
+
+      .outbound-message {
+        background-color: #2B465B;
+      }
+    }
+
+    .new-conversation {
+      position: sticky;
+      bottom: 0;
+      height: 300px;
+      background-color: #2F3B46;
+      // margin: 15px;
+      border-radius: 5px;
+    }
+  }
+
+  .athlete-report {
+    // height: 100%;
+    // padding-bottom: 50px !important;
+    background-color: #2C3B46;
+
+    .report-header {
+      padding: 15px;
+    }
+
+    .report-athlete {
+      @include partial_bottom_border(85%);
+    }
+
+    .our-team-engagement {
+      padding: 15px 20px 15px 15px;
+      @include partial_bottom_border(100%);
+
+      .our-engagement-total {
+        font-size: 2rem;
+      }
+
+      .total-engagement-text {
+        overflow-wrap: break-word;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 15px;
+      }
+
+      .our-engagement-details {
+        i {
+          // margin-right: 5px;
+        }
+
+        .detail {
+          // margin-right: 5px;
+          // padding-right: 5px;
+          // border-right: 1px solid white;
+        }
+      }
+    }
+
+    .athlete-stats {
+      @include partial_bottom_border(85%);
+
+      .post-count {
+        font-size: 2rem;
+      }
+
+      .posts-analyzed-text {
+        color: $grey-text;
+        margin-bottom: 15px;
+      }
+
+      .post-count-header {
+        color: $grey-text;
+        margin-right: 5px;
+      }
+
+      .athlete-post-counts {
+        margin-bottom: 15px;
+      }
+
+      .activity {
+        margin-top: 15px;
+      }
+    }
+
+    .program-engagement {
+      margin-top: 20px;
+
+      .header {
+        padding: 15px;
+        margin-bottom: 15px;
+        background-color: #27343E;
+      }
+
+      #athlete-program-engagement-chart {
+        // margin: 5px;
+        // margin-right: 15px;
+        margin-bottom: 20px;
+        background-color: #27343E;
+      }
+    }
+
+    .coach-engagement {
+      margin-bottom: 20px;
+
+      .programs {
+        // padding-left: 20px;
+        // padding-right: 20px;
+        .index {
+          justify-content: left;
+          padding-left: 15px;
+          margin-bottom: -22px;
+        }
+
+        .logo {
+          margin-bottom: 15px;
+        }
+
+        .name {
+          font-size: 1.5rem;
+        }
+
+        .total-engagements {
+          font-size: 2.5rem;
+        }
+
+        .total-engagements-footer {
+          color: $grey-text;
+        }
+
+        .total-engagement-details {
+          padding: 10px;
+        }
+
+        .follower-details {
+          .follower-name,
+          .following-name {
+            color: $grey-text;
+            margin-right: 5px;
+          }
+
+          .followers-link,
+          .following-link {
+            text-decoration: underline;
+          }
+        }
+
+        .slick-arrow {
+          z-index: 9999;
+        }
+
+        .prev-program {
+          left: 10px;
+          top: 175px;
+        }
+
+        .next-program {
+          right: 15px;
+          top: 175px;
+        }
+
+        .following {
+          //   padding-left: 30px;
+          //   padding-right: 30px;
+          .prev-following {
+            left: 10px;
+          }
+
+          .next-following {
+            right: 10px;
+          }
+        }
+
+        .followers {
+          //   padding-left: 30px;
+          //   padding-right: 30px;
+          .prev-follower {
+            left: 10px;
+          }
+
+          .next-follower {
+            right: 10px;
+          }
+        }
+      }
+      // .carousel-nav-left,
+      // .carousel-nav-right {
+      //   background: none;
+      //   height: 100px;
+      //   font-size: 65px;
+      //   width: 20px;
+      //   padding: 0;
+      // }
+    }
+
+    .sentiment {
+      .header {
+        padding: 15px;
+        margin-bottom: 15px;
+        background-color: #27343E;
+        overflow-wrap: break-word;
+        width: 100%;
+        text-align: center;
+      }
+
+      .sentiment-details {
+        padding: 15px;
+
+        .sentiment-detail-label,
+        .sentiment-label {
+          color: $grey-text;
+          margin-right: 5px;
+        }
+
+        .sentiment-detail-label {
+          text-align: left;
+          width: 100%;
+        }
+
+        .progress {
+          height: 0.25rem;
+          margin-bottom: 5px;
+        }
+      }
+    }
+
+    .questionable-content,
+    .recruiting-content {
+      margin-bottom: 20px;
+
+      .section-header {
+        padding: 15px;
+        margin-bottom: 15px;
+        background-color: #27343E;
+        overflow-wrap: break-word;
+        width: 100%;
+        text-align: center;
+        height: auto;
+      }
+
+      .header {
+        padding: 15px;
+        color: $grey-text;
+        overflow-wrap: break-word;
+        width: 100%;
+        text-align: left;
+      }
+    }
+
+    // .questionable-content {
+    //   .tweets {
+    //     margin-bottom: 15px;
+    //   }
+    // }
+
+    .tweet-card {
+      background: rgba(0,0,0,0.10);
+      margin: 15px;
+      padding: 10px;
+      border-radius: 5px;
+
+      .details {
+        margin-bottom: 20px;
+      }
+
+      .date {
+        justify-content: flex-end;
+      }
+    }
+  }
+}

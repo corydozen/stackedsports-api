@@ -1,0 +1,164 @@
+<section class="accordions">
+  <div class="accordion is-active">
+    <div class="accordion-header toggle">
+      <p>General Info</p>
+      <div class="counts">
+        ( 0 of 6 )
+      </div>
+      <button class="toggle" aria-label="toggle"></button>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content">
+        <div class="">
+          <div class="field">
+            <strong>First name:</strong>
+            <%= best_in_place @athlete, :first_name, url: athlete_path(id: @athlete.id), as: :input, place_holder: "click me to edit", remote: true %>
+          </div>
+          <div  class="field">
+            <strong>Last name:</strong>
+            <%= best_in_place @athlete, :last_name, url: athlete_path(id: @athlete.id), as: :input, place_holder: "click me to edit", remote: true %>
+          </div>
+
+          <div class="field">
+            <strong>Nick name:</strong>
+            <%= best_in_place @athlete, :nick_name, url: athlete_path(id: @athlete.id), as: :input, place_holder: "click me to edit", remote: true %>
+          </div>
+
+          <div class="field">
+            <strong>Phone:</strong>
+            <%= best_in_place @athlete, :phone, url: athlete_path(id: @athlete.id), as: :input, place_holder: "click me to edit", remote: true %>
+          </div>
+
+          <div class="field">
+          <strong>Email:</strong>
+          <%= best_in_place @athlete, :email, url: athlete_path(id: @athlete.id), as: :input, place_holder: "click me to edit", remote: true %>
+          </div>
+
+          <div class="field">
+            <%= icon('fab', 'twitter') %>
+            <%= @athlete.is_a?(Athlete) ? @athlete.twitter_profile.screen_name : @athlete.athlete.twitter_profile.screen_name %>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-header toggle">
+      <p>Details</p>
+      <div class="counts">
+        ( 0 of 6 )
+      </div>
+      <button class="toggle" aria-label="toggle"></button>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content">
+        <div class="">
+          <div class="field">
+            <strong>Graduation year:</strong>
+            <%= best_in_place @athlete, :graduation_year, url: athlete_path(id: @athlete.id), display_with: lambda { |v| v.year if v.present? && v.year.present? }, value: (@athlete.graduation_year.present? ? @athlete.graduation_year.year : nil), as: :input, place_holder: "click me to edit", remote: true %>
+          </div>
+
+          <div class="field">
+            <strong>High school:</strong>
+            <%= best_in_place @athlete, :high_school, url: athlete_path(id: @athlete.id), as: :input, place_holder: "click me to edit", remote: true %>
+          </div>
+
+          <div class="field">
+            <strong>State:</strong>
+            <%= best_in_place @athlete, :state, url: athlete_path(id: @athlete.id), as: :input, place_holder: "click me to edit", remote: true %>
+          </div>
+
+          <div class="field">
+            <strong>Coach name:</strong>
+            <%= best_in_place @athlete, :coach_name, url: athlete_path(id: @athlete.id), as: :input, place_holder: "click me to edit", remote: true %>
+          </div>
+
+          <div class="field">
+            <strong>Positions:</strong>
+            <%= best_in_place @athlete, :positions, url: athlete_path(id: @athlete.id), display_with: lambda { |v| @athlete.position_list }, as: :input, place_holder: "click me to edit", remote: true %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-header toggle">
+      <p>FAMILY DETAILS</p>
+      <div class="counts">
+        ( 0 of 2 )
+      </div>
+      <button class="toggle" aria-label="toggle"></button>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content">
+        <div class="">
+          <div class="field">
+            <strong>Mothers name:</strong>
+            <%#= @athlete.mothers_name %>
+            <%= best_in_place @athlete, :mothers_name, url: athlete_path(id: @athlete.id), as: :input, place_holder: "click me to edit", remote: true %>
+          </div>
+
+          <div class="field">
+            <strong>Fathers name:</strong>
+            <%#= @athlete.fathers_name %>
+            <%= best_in_place @athlete, :fathers_name, url: athlete_path(id: @athlete.id), as: :input, place_holder: "click me to edit", remote: true %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% if @athlete.is_a?(Athlete) %>
+  <div class="accordion">
+    <div class="accordion-header toggle">
+      <p>EXTERNAL PROFILES</p>
+      <div class="counts">
+        ( 0 of 2 )
+      </div>
+      <button class="toggle" aria-label="toggle"></button>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content">
+        <div class="">
+          <div class="field">
+            <strong>Hudl:</strong>
+            <%= best_in_place @athlete, :hudl_id, url: athlete_path(id: @athlete.id), as: :input, place_holder: "click me to edit", remote: true %>
+          </div>
+
+          <div class="field">
+            <strong>Arms:</strong>
+            <%= best_in_place @athlete, :arms_id, url: athlete_path(id: @athlete.id), as: :input, place_holder: "click me to edit", remote: true %>
+          </div>
+
+        <!-- <div class="field"> <%#= form.label :instagram_id %> <%#= form.text_field :instagram_id %> </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+  <div class="accordion">
+    <div class="accordion-header toggle">
+      <p>TAGS</p>
+      <button class="toggle" aria-label="toggle"></button>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content">
+        <div class="">
+        Show tags here...
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="text/javascript">
+  $( document ).ready(function() {
+    var accordions = bulmaAccordion.attach();
+    /* Activating Best In Place */
+    jQuery(".best_in_place").best_in_place();
+  });
+</script>

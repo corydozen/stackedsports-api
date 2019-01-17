@@ -1,0 +1,38 @@
+<div class="report-athlete">
+  <div class="level">
+    <div class="profile-image level-item">
+      <figure class="image is-128x128">
+        <%= image_tag @athlete.athlete.twitter_profile.profile_image.gsub('_normal', ''), class: 'is-rounded' %>
+      </figure>
+    </div>
+  </div>
+  <div class="level">
+    <div class="level-item">
+      <div class="athlete-name">
+        <%= "#{@athlete.first_name} #{@athlete.last_name}" %>
+      </div>
+    </div>
+  </div>
+  <div class="level">
+    <div class="level-item">
+      <div class="athlete-screen-name">
+        <%= icon('fab', 'twitter') %>
+        <%= @athlete.athlete.twitter_profile.screen_name %>
+      </div>
+    </div>
+  </div>
+  <div class="level">
+    <div class="level-item">
+      <div class="athlete-last-communication">
+        <% last_message = @athlete.get_conversation(current_user)[:messages].last %>
+        <% if last_message.present? %>
+          Last connected
+          <%= time_ago_in_words(last_message['created_at']) %>
+          ago (<%= last_message['message_type'] %>)
+        <% else %>
+          No communication...
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

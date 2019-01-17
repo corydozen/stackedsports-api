@@ -1,0 +1,56 @@
+<div class="messages-list" style="padding-top: .75rem !important">
+  <div class="columns is-paddingless is-fullheight">
+
+    <%= render partial: 'inbox_list' %>
+
+    <div class="column is-5 is-primary-background">
+      <section class="inbox-conversation-header is-dark-background">
+        <div>Sender Name</div>
+        <div>
+          <span class="icon has-text-info"><i class="fab fa-twitter"></i></span> <%= link_to "Direct Message ▼", '#', class: 'white-link' %><br>
+        </div>
+      </section>
+      <section>
+        <% @sms_messages.each do |message| %>
+          <div class="conversation-message <%= message.direction %>">
+            <div class="user">
+              <img class="profile-image"src='https://randomuser.me/api/portraits/men/49.jpg' />
+            </div>
+            <div class="message"><%= message.text %></div>
+          </div>
+        <% end %>
+      </section>
+      <section class="inbox-response-form is-light-background">
+        <form>
+          <div>
+            <label>Send As:</label>
+          </div>
+          <div>
+            <label>From:</label>
+          </div>
+          <hr />
+          <div>
+            <label>Type message here:</label>
+            <input />
+          </div>
+          <hr />
+          <div class="response-form-controls">
+            <div>Use X to insert athlete name</div>
+            <div><i class="far fa-camera fa-2x icon"></i></div>
+            <div><i class="far fa-clock fa-2x icon"></i></div>
+            <button>Send</button>
+          </div>
+
+
+        </form>
+      </section>
+    </div>
+
+    <div class="column is-3 is-light-background">
+      <div class="has-text-centered">
+        <p class="has-text-white">Report</p>
+      </div>
+    </div>
+
+  </div>
+</div>

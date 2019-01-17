@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  as_of: 
+  athlete: one
+  mixed: 1.5
+  negative: 1.5
+  neutral: 1.5
+  positive: 1.5
+  sentiment: MyString
+
+two:
+  as_of: 
+  athlete: two
+  mixed: 1.5
+  negative: 1.5
+  neutral: 1.5
+  positive: 1.5
+  sentiment: MyString

@@ -1,0 +1,46 @@
+<div id="media-filters" class="is-hidden">
+  <div id="media-filters-header">
+    Media Filter
+  </div>
+  <hr class="media-dark">
+  <div id="media-filters-search">
+    <input type="text" placeholder="Search" id="media-filter-search" class="input is-rounded media-input" style="font-family:Arial, FontAwesome" value="<%= params[:name] || '' %>" />
+    Type to filter by media title, tag, or media type 
+  </div>
+  <hr class="media-dark">
+  <div id="media-filters-type">
+    <div class="columns">
+      <div class="column is-2">
+        <i class="far fa-video icon"></i>
+      </div>
+      <div class="column media-filter-type" data-type="video">Videos (4 total)</div>
+    </div>
+    <div class="columns">
+      <div class="column is-2">
+        <i class="far fa-camera icon"></i>
+      </div>
+      <div class="column media-filter-type" data-type="image">Images (54 total)</div>
+    </div>
+    <div class="columns">
+      <div class="column is-2">
+        <i class="far fa-play-circle icon"></i>
+      </div>
+      <div class="column media-filter-type" data-type="gif">GIF (5 total)</div>
+    </div>
+  </div>
+  <hr class="media-dark">
+  <div id="media-filters-tags">
+    <div class="columns">
+      <% current_user.teams.first.tags.each_with_index do |tag, i|%>
+        <div class="column is-1"><input type="checkbox" class="media-input media-filter-checkbox" name="<%=tag.name%>" <%= (@params_tags && (@params_tags.include? tag.name.downcase)) ? 'checked' : '' %>></div>
+        <div class="column is-5 is-size-7">
+          <%= tag.name %>
+        </div>
+        <% if i % 2 == 1 %>
+        </div>
+        <div class="columns">
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

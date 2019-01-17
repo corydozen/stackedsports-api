@@ -1,0 +1,69 @@
+$primary: #2B90C7;
+$blue: $primary;
+$primary-background: #20303B;
+$light-background: #273642;
+$dark-background: #1C252E;
+$white: #fff;
+$light-text: $white;
+$grey-text: #8D9296;
+$twitter: #568EDF;
+$phone: #6BA323;
+
+$table-background-color: transparent;
+
+$family-sans-serif: Roboto, BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+
+a, a:link {
+	&:hover, &:focus {
+		text-decoration: underline;
+	}
+}
+
+hr {
+	height: 1px;
+	background-color: $primary-background;
+}
+
+.label {
+	font-weight: normal;
+}
+
+.wrap {
+	padding: 1rem;
+	border-radius: 10px;
+}
+
+.badge.is-vecentered-in-row {
+  top: 30px;
+  left: 15px;
+}
+
+.badge[data-badge]::after {
+  box-shadow: none;
+}
+
+.is-primary-background {
+	background-color: $primary-background;
+}
+
+.is-light-background {
+	background-color: $light-background;
+}
+
+.is-dark-background {
+	background-color: $dark-background;
+}
+
+.user-avatar {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	background-image: url('https://randomuser.me/api/portraits/men/49.jpg');
+	background-size: cover;
+	background-position: center center;
+
+	&.is-small {
+		width: 40px;
+		height: 40px;
+	}
+}

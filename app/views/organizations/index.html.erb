@@ -1,0 +1,88 @@
+<div class="container">
+
+
+
+<h1 class="title">Organizations</h1>
+
+<div class="level">
+  <div class="level-left">
+    <%= link_to 'New Organization', new_organization_path, class: 'button is-primary is-outlined' %>
+  </div>
+  <div class="level-right">
+    <%= form_tag(organizations_path, method: :get) do %>
+    <div class="field is-grouped">
+      <%= render partial: 'layouts/form_helpers/per_page_dropdown' %>
+      <%= text_field_tag :search, params[:search], placeholder: 'Search by name or address fields, or phone number', class: 'input', style:'width: 410px' %>
+      <%= submit_tag "Search", class: 'button is-info' %>
+    </div>
+
+    <% end %>
+  </div>
+</div>
+
+<table class="table is-striped is-narrow is-hoverable" width="100%">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Display Name*</th>
+      <th>Name*</th>
+      <th class="is-hidden-mobile is-hidden-touch">Phone</th>
+      <th class="is-hidden-mobile is-hidden-touch">Address</th>
+      <th class="is-hidden-mobile is-hidden-touch">Address 2</th>
+      <th class="is-hidden-mobile is-hidden-touch">City</th>
+      <th class="is-hidden-mobile is-hidden-touch">State</th>
+      <th class="is-hidden-mobile is-hidden-touch">Zip</th>
+      <th class="is-hidden-mobile is-hidden-touch">Stripe customer</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @organizations.each do |organization| %>
+      <tr>
+        <td><%= image_tag organization.logo.url(:thumb) %></td>
+        <td><%= best_in_place organization, :nickname %></td>
+        <td><%= best_in_place organization, :name %></td>
+        <td class="is-hidden-mobile is-hidden-touch"><%= organization.phone %></td>
+        <td class="is-hidden-mobile is-hidden-touch"><%= organization.address %></td>
+        <td class="is-hidden-mobile is-hidden-touch"><%= organization.address_2 %></td>
+        <td class="is-hidden-mobile is-hidden-touch"><%= organization.city %></td>
+        <td class="is-hidden-mobile is-hidden-touch"><%= organization.state %></td>
+        <td class="is-hidden-mobile is-hidden-touch"><%= organization.zip %></td>
+        <td class="is-hidden-mobile is-hidden-touch"><%= organization.stripe_customer_id %></td>
+        <td>
+          <%= link_to organization do %>
+            <span class="icon has-text-info">
+              <i class="far fa-building"></i>
+            </span>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to edit_organization_path(organization) do %>
+            <span class="icon has-text-info">
+                <i class="fas fa-edit"></i>
+            </span>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to organization, method: :delete, data: { confirm: 'Are you sure?' } do%>
+            <span class="icon has-text-danger">
+              <i class="fas fa-trash-alt"></i>
+            </span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @organizations, renderer: BulmaPagination::Rails, class: 'is-centered is-small is-rounded' %>
+</div>
+
+
+<script type="text/javascript">
+  $( document ).ready(function() {
+    /* Activating Best In Place */
+    jQuery(".best_in_place").best_in_place();
+  });
+</script>

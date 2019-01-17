@@ -1,0 +1,96 @@
+<div class="container">
+
+
+
+<h1 class="title">Teams</h1>
+
+<div class="level">
+  <div class="level-left">
+    <%= link_to 'New Team', new_team_path, class: 'button is-primary is-outlined' %>
+  </div>
+  <div class="level-right">
+    <%= form_tag(teams_path, method: :get) do %>
+    <div class="field is-grouped">
+      <%= render partial: 'layouts/form_helpers/per_page_dropdown' %>
+      <%= select_tag :organization_id, options_for_select(Organization.all.order(:name).collect{ |org| [org.name, org.id]}, params[:organization_id]), prompt: "Search by Organization", include_blank: "All", class: 'select' %>
+      <%= select_tag :conference_id, options_for_select(Conference.all.order(:name).collect{ |conf| [conf.name, conf.id]}, params[:conference_id]), prompt: "Search by Conference", include_blank: "All", class: 'select' %>
+      <%= text_field_tag :search, params[:search], placeholder: 'Search by name', class: 'input', style:'width: 410px' %>
+      <%= submit_tag "Search", class: 'button is-info' %>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+<table class="table is-striped is-narrow is-hoverable" width="100%">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th class="is-hidden-mobile is-hidden-touch">Photo url</th>
+      <th class="is-hidden-mobile is-hidden-touch">Phone</th>
+      <th class="is-hidden-mobile is-hidden-touch">Trial start date</th>
+      <th class="is-hidden-mobile is-hidden-touch">Override plan</th>
+      <th class="is-hidden-mobile is-hidden-touch">Organization</th>
+      <th class="is-hidden-mobile is-hidden-touch">Conference*</th>
+      <th class="is-hidden-mobile is-hidden-touch">Division</th>
+      <th class="is-hidden-mobile is-hidden-touch">Stripe subscription</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @teams.each do |team| %>
+      <tr>
+        <td><%= team.name %></td>
+        <td class="is-hidden-mobile is-hidden-touch"><%= team.photo_url %></td>
+        <td class="is-hidden-mobile is-hidden-touch"><%= team.phone %></td>
+        <td class="is-hidden-mobile is-hidden-touch"><%= team.trial_start_date.to_date if team.trial_start_date.present? %></td>
+        <td class="is-hidden-mobile is-hidden-touch"><%= team.override_plan_id %></td>
+        <td class="is-hidden-mobile is-hidden-touch"><%= team.organization.name %></td>
+        <td><%= best_in_place team, :conference_id, as: :select, collection: Conference.all.order(:sort, :name).map{ |conf| [conf.id, conf.name]}.unshift(["",nil]), include_blank: true, remote: true %></td>
+        <td class="is-hidden-mobile is-hidden-touch"><%= team.division %></td>
+        <td class="is-hidden-mobile is-hidden-touch"><%= team.stripe_subscription_id %></td>
+        <td>
+          <%= link_to team do %>
+            <span class="icon has-text-info">
+              <i class="fas fa-users"></i>
+            </span>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to edit_team_path(team) do %>
+            <span class="icon has-text-info">
+                <i class="fas fa-edit"></i>
+            </span>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to team, method: :delete, data: { confirm: 'Are you sure?' } do%>
+            <span class="icon has-text-danger">
+              <i class="fas fa-trash-alt"></i>
+            </span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @teams, renderer: BulmaPagination::Rails, class: 'is-centered is-small is-rounded' %>
+</div>
+
+<script type="text/javascript">
+$( document ).ready(function() {
+  ready();
+});
+
+var ready = function() {
+  /* Activating Best In Place */
+  jQuery(".best_in_place").best_in_place();
+
+  var boxes = $('.delete-select');
+
+  boxes.on('change', function () {
+    $('.delete-selected').prop('disabled', !boxes.filter(':checked').length);
+  }).trigger('change');
+}
+</script>

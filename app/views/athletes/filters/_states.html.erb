@@ -1,0 +1,15 @@
+<div class="columns is-multiline is-mobile states">
+  <!-- List top 6 states based on count then show more -->
+  <div class="column is-12 header">
+    State
+  </div>
+
+  <% @states.each do |state, count| %>
+    <div class="column field">
+      <%= check_box_tag 'states[]', state, false, id: "state_#{state}", class: 'state filter is-checkradio  is-info', data: {  url: athlete_filter_path, method: :post, state: state }  %>
+      <label for="state_<%= state %>">
+        <%= "#{state} (#{count})" %>
+      </label>
+    </div>
+  <% end %>
+</div>

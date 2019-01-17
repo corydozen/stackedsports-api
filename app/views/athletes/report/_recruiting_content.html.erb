@@ -1,0 +1,91 @@
+<% commits = nil if local_assigns[:commits].nil? %>
+<% offers = nil if local_assigns[:offers].nil? %>
+<% cvt = nil if local_assigns[:cvt].nil? %>
+<% tweet_items = 2 if local_assigns[:tweet_items].nil? %>
+<div class="recruiting-content">
+  <div class="level">
+    <div class="level-item">
+      <div class="section-header">
+        Relevant Recruiting Content
+      </div>
+    </div>
+  </div>
+  <% if commits.present? %>
+  <div class="commits">
+
+    <div class="level">
+      <div class="level-item">
+        <div class="header">
+          Commits mentioned
+        </div>
+      </div>
+    </div>
+    <div class="columns is-multiline is-desktop">
+      <% commits.each_with_index do |tweet, index| %>
+      <div class="column commit <%= 'is-hidden' if index > tweet_items %>">
+        <%= render 'athletes/report/tweet_card', tweet: tweet %>
+      </div>
+      <% end %>
+    </div>
+    <div class="level">
+      <div class="level-item">
+        <%= link_to('View More', '#', class: 'white-link', id: 'view-more-commits') if commits.count > 3 %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+
+  <div class="offers">
+    <div class="level">
+      <div class="level-item">
+        <div class="header">
+          Offers mentioned
+        </div>
+      </div>
+    </div>
+    <% if offers.present? %>
+    <div class="columns is-multiline is-desktop">
+      <% offers.each_with_index do |tweet, index| %>
+      <div class="column offer <%= 'is-hidden' if index > tweet_items %>">
+        <%= render 'athletes/report/tweet_card', tweet: tweet %>
+      </div>
+      <% end %>
+    </div>
+      <div class="level">
+        <div class="level-item">
+          <%= link_to('View More', '#', class: 'white-link', id: 'view-more-offers') if offers.count > 3 %>
+        </div>
+      </div>
+    <% else %>
+      <%= render 'athletes/report/tweet_card' %>
+    <% end %>
+
+  </div>
+
+  <div class="camp-visits">
+    <div class="level">
+      <div class="level-item">
+        <div class="header">
+          Camps & Visits mentioned
+        </div>
+      </div>
+    </div>
+    <% if cvt.present? %>
+    <div class="columns is-multiline is-desktop">
+      <% cvt.each_with_index do |tweet, index| %>
+      <div class="column cv <%= 'is-hidden' if index > tweet_items %>">
+        <%= render 'athletes/report/tweet_card', tweet: tweet %>
+      </div>
+      <% end %>
+    </div>
+      <div class="level">
+        <div class="level-item">
+          <%= link_to('View More', '#', class: 'white-link', id: 'view-more-cv') if cvt.count > 3 %>
+        </div>
+      </div>
+    <% else %>
+      <%= render 'athletes/report/tweet_card' %>
+    <% end %>
+
+  </div>
+</div>

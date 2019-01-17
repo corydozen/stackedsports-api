@@ -1,0 +1,10 @@
+<div class="program-engagement">
+  <div class="header">
+    <div class="level">
+      <div class="level-item">
+        Program Engagement
+      </div>
+    </div>
+  </div>
+  <%= line_chart( athlete_report_program_engagement_path(athlete_id: @athlete.id), points: false, defer: true, discrete: false, messages: {empty: "No data"}, download: true, id: 'athlete-program-engagement-chart', legend: "bottom" ) %>
+</div>

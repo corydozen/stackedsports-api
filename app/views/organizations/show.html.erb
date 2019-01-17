@@ -1,0 +1,48 @@
+<div class="container">
+
+<h1 class="title">
+  <%= image_tag @organization.logo.url(:thumb) %>
+  <br>
+  <%= @organization.name %>
+</h1>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @organization.phone %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @organization.address %>
+</p>
+
+<p>
+  <strong>Address 2:</strong>
+  <%= @organization.address_2 %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @organization.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @organization.state %>
+</p>
+
+<p>
+  <strong>Zip:</strong>
+  <%= @organization.zip %>
+</p>
+
+<p>
+  <strong>Stripe customer:</strong>
+  <%= @organization.stripe_customer_id %>
+</p>
+
+
+
+<%= link_to 'Edit', edit_organization_path(@organization) %> |
+<%= link_to 'Back', organizations_path %>
+</div>

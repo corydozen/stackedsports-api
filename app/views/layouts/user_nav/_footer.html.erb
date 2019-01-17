@@ -1,0 +1,46 @@
+<div class="footer">
+  <%= link_to "#", class: 'white-link' do %>
+
+  <!-- TODO: Show current_user profile image -->
+  <!-- <span> -->
+    <!-- <i class="far fa-user-circle fa-2x"></i> -->
+  <!-- </span> -->
+  <%= image_tag current_user.primary_twitter_profile.first.profile_image, class: 'footer-profile-image' %>
+
+  <%= render 'layouts/user_nav/profile' %>
+
+<% end %>
+</div>
+
+<script type="text/javascript">
+
+$( document ).ready(function() {
+  // $('.fa-user-circle').hover(function () {   $('.user-profile').show(); }, function () {   $('.user-profile').hide(); });
+
+  var hoverTimeout,
+    keepOpen = false,
+    stayOpen = $('.stay-open');
+  $(document).on('mouseenter', '.footer-profile-image', function () {
+    clearTimeout(hoverTimeout);
+    stayOpen.show();
+  }).on('mouseleave', '.footer-profile-image', function () {
+    clearTimeout(hoverTimeout);
+    hoverTimeout = setTimeout(function () {
+      if (!keepOpen) {
+        stayOpen.hide();
+      }
+    }, 500);
+  });
+
+  $(document).on('mouseenter', '.stay-open', function () {
+    keepOpen = true;
+    setTimeout(function () {
+      keepOpen = false;
+    }, 1500);
+  }).on('mouseleave', '.stay-open', function () {
+    keepOpen = false;
+    stayOpen.hide();
+  });
+
+});
+</script>

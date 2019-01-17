@@ -1,0 +1,6 @@
+<%= render 'email_templates/header', preview_text: 'RecruitSuite Activation Required' %>
+<h2>Hello <%= @user.first_name %>,</h2>
+<p>Thank you for signing up for RecruitSuite, the most efficient tool for recruiting on social media.</p>
+<p>Before you can start using everything that RecruitSuite has to offer, we need to activate your account. Just click on this <a href='<%= @url %>'>Activation Link</a> and you’ll be on your way.</p>
+Have a great day, and happy recruiting!
+<%= render 'email_templates/footer', fine_print: '', campaign: 'activations', campaign_content: '' %>

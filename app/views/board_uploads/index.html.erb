@@ -1,0 +1,72 @@
+<div class="container">
+
+<button id='new-upload-button' class="button is-primary is-outlined" type="button" name="button">New Board Upload </button>
+
+<div id="new-upload" style="display: none;">
+  <%= render 'board_uploads/form' %>
+</div>
+
+<script type="text/javascript">
+  $( document ).ready(function() {
+    $('#new-upload-button').click(function () {
+      $('#new-upload').toggle();
+      $('#new-upload-button').toggle();
+    });
+    $('.cancel-upload').click(function () {
+      $('#new-upload').toggle();
+      $('#new-upload-button').toggle();
+    });
+  });
+</script>
+
+<h1 class="title">Previous Uploads</h1>
+<div class="level-right">
+  <%= form_tag(board_uploads_path, method: :get) do %>
+  <div class="field is-grouped">
+    <%= render partial: 'layouts/form_helpers/per_page_dropdown' %>
+    <%= text_field_tag :search, params[:search], placeholder: 'Search by file name', class: 'input', style:'width: 410px' %>
+    <%= submit_tag "Search", class: 'button is-info' %>
+  </div>
+  <% end %>
+  </div>
+
+
+<table class="table is-striped is-fullwidth is-hoverable">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Board</th>
+      <!-- <th>Delete boards</th>
+      <th>Delete athletes</th> -->
+      <th>Requestor</th>
+      <th>Processed</th>
+      <!-- <th>Uploaded at</th>
+      <th>Processed at</th> -->
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @board_uploads.each do |board_upload| %>
+      <% rs_user = RsUser.find(board_upload.user_id) %>
+      <% requestor = User.find(board_upload.requestor) %>
+      <tr>
+        <td><%= "#{rs_user.name}" %></td>
+        <td><%= link_to board_upload.board_name, board_upload.board.url, target: '_blank' %></td>
+        <!-- <td><%#= board_upload.delete_boards %></td>
+        <td><%#= board_upload.delete_athletes %></td> -->
+        <td><%= "#{requestor.first_name} #{requestor.last_name}" %></td>
+        <td><%= board_upload.processed %></td>
+        <!-- <td><%#= board_upload.created_at %></td>
+        <td><%#= board_upload.updated_at if board_upload.processed  %></td> -->
+        <td><%= link_to 'Show', board_upload %></td>
+        <!-- <td><%#= link_to 'Edit', edit_board_upload_path(board_upload) %></td> -->
+        <td><%= link_to 'Destroy', board_upload, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @board_uploads, renderer: BulmaPagination::Rails, class: 'is-centered is-small is-rounded' %>
+
+</div>

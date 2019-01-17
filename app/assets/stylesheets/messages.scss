@@ -1,0 +1,173 @@
+.new-message {
+	a, a:link {
+		color: $blue;
+		font-weight: bold;
+
+		&:hover, &:focus {
+			text-decoration: none;
+			color: $white;
+		}
+	}
+}
+.messages-list {
+
+	.wrap {
+		padding: 0;
+
+		.messages-header {
+			width: 100%;
+			padding: 1rem;
+			border-bottom: 1px solid $primary-background;
+
+			hr {
+				margin: .75rem 0;
+			}
+		}
+
+		.messages-body {
+			padding: 1rem 2rem;
+			border-bottom: 1px solid $primary-background;
+
+			.message-ind {
+				padding: 1rem;
+				margin-bottom: 1rem;
+				border-radius: 10px;
+				display: inline-block;
+			}
+
+			.message-to {
+				text-align: right;
+
+				.message-ind {
+					background-color: rgba($primary, 0.1);
+				}
+			}
+
+			.message-from {
+				text-align: left;
+
+				.message-ind {
+					background-color: rgba($white, 0.1);
+				}
+			}
+
+			.message-img {
+				max-width: 200px;
+				border-radius: 10px;
+			}
+		}
+
+		.messages-footer {
+			padding: 1rem 1.25rem 2rem;
+
+			.table {
+				border-bottom: 1px solid $primary-background;
+
+				tr {
+
+					td {
+						padding: .75rem 0;
+						border-color: $primary-background;
+					}
+				}
+			}
+
+			.button {
+
+				&.is-text {
+					color: $grey-text;
+
+					&:hover, &:focus {
+						color: $white;
+						background-color: transparent;
+						text-decoration: none;
+					}
+				}
+			}
+		}
+	}
+}
+
+.card-message {
+	border-radius: 10px;
+	border-left: 3px solid $primary-background;
+	cursor: pointer;
+
+	.card-content {
+		padding: 1rem;
+	}
+
+	&.is-active {
+		background-color: $dark-background;
+		border-color: $blue;
+		border-radius: 0 5px 5px 0;
+	}
+
+	&:hover {
+		background-color: darken($light-background, 1);
+		border-color: darken($light-background, 1);
+	}
+}
+
+.inbox {
+	margin-top: 2rem;
+
+	ul.accounts-list {
+		margin-left: .75rem;
+		line-height: 1.75rem;
+		font-size: .85rem;
+	}
+
+	.section {
+		margin-bottom: 1.5rem;
+	}
+}
+
+.message-profile-image {
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+}
+
+.inbox-conversation-header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-end;
+}
+
+.inbox-report {
+	background-color: $dark-background;
+}
+
+.conversation-message {
+	display: flex;
+	margin: 20px 0;
+	.user {
+		flex: 1;
+		.profile-image {
+			border-radius: 50%;
+			height: 100px;
+			width: 100px;
+		}
+	}
+	.message {
+		flex: 3;
+		background: $light-background;
+		padding: 10px;
+		border-radius: 5px;
+	}
+}
+
+.in {
+	flex-direction: row-reverse;
+}
+
+.inbox-response-form {
+	padding: 10px;
+}
+
+.response-form-controls {
+	display: flex;
+	justify-content: space-between;
+}

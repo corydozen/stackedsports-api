@@ -1,0 +1,37 @@
+<div class="container">
+
+<h1 class="title">Existing Athletes</h1>
+
+<table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Board</th>
+      <th>Delete boards</th>
+      <th>Delete athletes</th>
+      <th>Requestor</th>
+      <th>Processed</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @board_uploads.each do |board_upload| %>
+      <% rs_user = RsUser.find(board_upload.user_id) %>
+      <% requestor = User.find(board_upload.requestor) %>
+      <tr>
+        <td><%= "#{rs_user.name}" %></td>
+        <td><%= link_to board_upload.board_name, board_upload.board.url, target: '_blank' %></td>
+        <td><%= board_upload.delete_boards %></td>
+        <td><%= board_upload.delete_athletes %></td>
+        <td><%= "#{requestor.first_name} #{requestor.last_name}" %></td>
+        <td><%= board_upload.processed %></td>
+        <td><%= link_to 'Show', board_upload %></td>
+        <!-- <td><%#= link_to 'Edit', edit_board_upload_path(board_upload) %></td> -->
+        <td><%= link_to 'Destroy', board_upload, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+</div>

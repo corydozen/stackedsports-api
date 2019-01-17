@@ -1,0 +1,25 @@
+<% style = case color.downcase
+ when 'green'
+   'is-badge-success'
+ when 'yellow'
+   'is-badge-warning'
+ when 'red'
+    'is-badge-danger'
+  else
+    ''
+end %>
+
+<% size = case size.downcase
+when 'small'
+   'is-badge-small'
+ when 'medium'
+   'is-badge-medium'
+ when 'large'
+    'is-badge-large'
+  else
+    ''
+end %>
+
+<% count = nil unless count.is_a?(Numeric) %>
+
+  <span class="badge <%= style %> <%= size %> <%= centered == true ? 'is-vecentered-in-row' : '' %>" data-badge="<%= count %>"></span>

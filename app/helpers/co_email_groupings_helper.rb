@@ -1,0 +1,2 @@
+module CoEmailGroupingsHelper
+end

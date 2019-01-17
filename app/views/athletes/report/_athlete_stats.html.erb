@@ -1,0 +1,58 @@
+<div class="athlete-stats">
+  <div class="level">
+    <div class="level-item header">
+      Account Stats
+    </div>
+  </div>
+  <div class="level">
+    <div class="level-item post-count">
+      <%= @athlete.athlete.twitter_profile.tweets.count %>
+    </div>
+  </div>
+  <div class="level">
+    <div class="level-item posts-analyzed-text">
+      Total posts analyzed
+    </div>
+  </div>
+  <div class="level athlete-post-counts">
+    <div class="level-item">
+      <span class="post-count-header">Original</span>
+      <span class="original_tweet_count"><%= @athlete.athlete.twitter_profile.original_tweets.count %></span>
+    </div>
+    <div class="level-item">
+      <span class="post-count-header">Retweets</span>
+      <span class="retweet_count"><%= @athlete.athlete.twitter_profile.retweets.count %></span>
+    </div>
+  </div>
+  <div class="level">
+    <div class="level-item">
+      <span class="post-count-header">Social Media Activity:</span>
+      <span><%= "Needed" %></span>
+    </div>
+  </div>
+
+  <div class="activity">
+    <div class="level">
+      <div class="level-item">
+        <span class="post-count-header">Most active at:</span>
+        <span class="most-active-time"><%= @athlete.athlete.most_active_time(_time_zone: cookies['browser.timezone']) %></span>
+      </div>
+    </div>
+    <div class="level">
+      <div class="level-item">
+        <%= column_chart( athlete_report_active_hours_path(athlete_id: @athlete.id), defer: true, discrete: true, messages: {empty: "No data"}, download: true, id: "athlete-active-hours-chart", height: "150px", colors: ['#3B8AC8'] ) %>
+      </div>
+    </div>
+    <div class="level">
+      <div class="level-item">
+        <span class="post-count-header">Most active day:</span>
+        <span class="most-active-time"><%= @athlete.athlete.most_active_day(_time_zone: cookies['browser.timezone']) %></span>
+      </div>
+    </div>
+    <div class="level">
+      <div class="level-item">
+        <%= column_chart( athlete_report_active_days_path(athlete_id: @athlete.id), defer: true, discrete: true, messages: {empty: "No data"}, download: true, id: "athlete-active-days-chart", height: "150px", colors: ['#3B8AC8'] ) %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,210 @@
+
+  <div class="search-results">
+
+    <% if @results[:athletes].present? %>
+    <div class="athlete-results-header">
+      <span>Is this who you were looking for?</span>
+    </div>
+
+    <div class="athlete-result-list">
+      <% @results[:athletes].each do |athlete| %>
+      <div class="group-margin athlete-result-item">
+        <div class="columns">
+          <div class="column">
+            <div class="columns is-multiline">
+              <div class="column is-3">
+                <figure class="image is-48x48">
+                  <%= image_tag athlete.twitter_profile.profile_image, class: 'is-rounded' %>
+                </figure>
+              </div>
+              <div class="column has-text-left">
+                <%= "#{athlete.first_name} #{athlete.last_name}" %>
+                <br>
+                <%= "@#{athlete.twitter_profile.screen_name}" if athlete.twitter_profile.present? && athlete.twitter_profile.screen_name.present? %>
+              </div>
+              <div class="column is-half has-text-left">
+                <%= "Grad: #{athlete.graduation_year.strftime("%Y")}" if athlete.graduation_year.present? %>
+                <br>
+                <%= "HS: #{athlete.high_school}" if athlete.high_school.present? %>
+              </div>
+              <div class="column is-half has-text-left">
+                <%= "State: #{athlete.state}" if athlete.state.present? %>
+                <br>
+                <%= "Positions: #{athlete.position}" if athlete.position.present? %>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <%
+              is_current_athlete = @current_athletes.include?(athlete.id)
+              athlete_attrs = athlete.attributes.except('phone')
+              %>
+
+            <% if is_current_athlete %>
+            <div class=" has-ribbon">
+                  <div class="ribbon is-info">Already on team</div>
+                </div>
+            <% else %>
+              <div class="field">
+                <input class="new-team-athlete is-checkradio is-block is-info is-medium" id='<%= "athlete_radio_#{athlete.id}" %>' type="checkbox" name="athlete_checkbox" <%= is_current_athlete ? 'disabled' : '' %> data-athlete_attrs = "<%= athlete_attrs.merge(screen_name: athlete.twitter_profile.screen_name).to_json %>">
+                <label for='<%= "athlete_radio_#{athlete.id}" %>'>Add this athlete</label>
+              </div>
+
+              <div class="field">
+                <input class="new-team-athlete is-checkradio is-block is-info is-medium" id='<%= "athlete_radio_#{athlete.id}_follow" %>' type="checkbox" name="athlete_checkbox" <%= is_current_athlete ? 'disabled' : '' %> data-follow = "true", data-athlete_attrs = "<%= athlete_attrs.merge(screen_name: athlete.twitter_profile.screen_name).to_json %>">
+                <label for='<%= "athlete_radio_#{athlete.id}_follow" %>'>Add & Follow</label>
+              </div>
+            <% end %>
+            <!-- <button type="button" name="button" class="button is-rounded is-small is-outlined is-info">ADD</button>
+            <button type="button" name="button" class="button is-rounded is-small is-outlined is-info">ADD & AUTOFILL</button> -->
+          </div>
+        </div>
+
+      </div>
+      <% end %>
+    </div>
+
+    <% end %>
+
+
+    <% if @results[:twitter].present? %>
+    <div class="twitter-results-header">
+      <span>Wrong person?</span><span> Check the twitter search below</span>
+      <hr>
+    </div>
+
+    <div class="twitter-result-list">
+      <% @results[:twitter].each do |twitter| %>
+      <div class="group-margin twitter-result-item">
+        <div class="columns">
+          <div class="column">
+            <div class="columns">
+              <div class="column is-2">
+                <figure class="image is-48x48">
+                  <%= image_tag twitter.profile_image_url_https.to_s, class: 'is-rounded' %>
+                </figure>
+              </div>
+              <div class="column is-10 has-text-left">
+                <%= twitter.name %>
+                <br>
+                <%= twitter.screen_name %>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="field">
+              <% twitter_profile_is_current_athlete = @current_athlete_twitter_ids.include?(twitter.id) %>
+              <input class="new-team-athlete is-checkradio is-block is-info is-medium" id='<%= "athlete_radio_#{twitter.id}" %>' type="checkbox" name="athlete_checkbox" <%= twitter_profile_is_current_athlete ? 'disabled' : '' %> data-twitter_attrs = "<%= twitter.attrs.to_json %>">
+              <label for='<%= "athlete_radio_#{twitter.id}" %>'><%= twitter_profile_is_current_athlete ? 'Already on team' : 'Add from this Profile' %></label>
+            </div>
+            <div class="field">
+              <% twitter_profile_is_current_athlete = @current_athlete_twitter_ids.include?(twitter.id) %>
+              <input class="new-team-athlete is-checkradio is-block is-info is-medium" id='<%= "athlete_radio_#{twitter.id}_follow" %>' type="checkbox" name="athlete_checkbox" <%= twitter_profile_is_current_athlete ? 'disabled' : '' %> data-follow = "true", data-twitter_attrs = "<%= twitter.attrs.to_json %>">
+              <label for='<%= "athlete_radio_#{twitter.id}_follow" %>'><%= twitter_profile_is_current_athlete ? 'Already on team' : 'Add & Follow ' %></label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+
+
+<script type="text/javascript">
+  $('.new-team-athlete.is-checkradio').click(function(){
+    // Get the clicked item
+    var clicked_checkbox = $(this);
+    if(clicked_checkbox.is(":checked")){
+      // clear all form inputs
+      // clear all checkboxes
+      var group = "input:checkbox[name='" + clicked_checkbox.attr("name") + "']";
+      $(group).prop("checked", false);
+      clicked_checkbox.prop("checked", true);
+
+      // setup some vars to hold values
+      var first_name = '',
+        last_name = '',
+        nick_name = '',
+        twitter_id = '',
+        grad_year = '',
+        hs_name = '',
+        hs_state = '',
+        coach = '',
+        positions = '',
+        mother = '',
+        father = '',
+        hudl_id = '',
+        arms_id = '',
+        athlete_id = '',
+        twitter_handle = '',
+        follow = clicked_checkbox.data('follow');
+
+
+      // Check if this was an athlete or twitter profile
+      if (clicked_checkbox.data('athlete_attrs')){
+        athlete_attributes = clicked_checkbox.data('athlete_attrs');
+        // console.log(athlete_attributes);
+
+        // All of these fields are set just for UI niceties
+        first_name = athlete_attributes.first_name;
+        last_name = athlete_attributes.last_name;
+        nick_name = athlete_attributes.nick_name;
+        grad_year = athlete_attributes.graduation_year;
+        hs_name = athlete_attributes.high_school;
+        hs_state = athlete_attributes.state;
+        coach = athlete_attributes.coach_name;
+        positions = athlete_attributes.position;
+        mother = athlete_attributes.mothers_name;
+        father = athlete_attributes.fathers_name;
+        hudl_id = athlete_attributes.hudl_id;
+        arms_id = athlete_attributes.arms_id;
+        twitter_handle = athlete_attributes.screen_name;
+
+        // This is the field that will do all the magic
+        athlete_id = athlete_attributes.id;
+      } else {
+        // this is the twitter profile
+        athlete_attributes = clicked_checkbox.data('twitter_attrs');
+        // console.log(athlete_attributes);
+
+        var name = athlete_attributes.name.split(" ");
+
+        first_name = name[0];
+        last_name = name[1];
+        nick_name = name[0];
+        twitter_id = athlete_attributes.id_str;
+        twitter_handle = athlete_attributes.screen_name;
+      }
+
+      $('#athlete_last_name').val(last_name);
+      $('#athlete_first_name').val(first_name);
+      $('#athlete_graduation_year').val(grad_year);
+      $('#athlete_high_school').val(hs_name);
+      $('#athlete_state').val(hs_state);
+      $('#athlete_coach_name').val(coach);
+      $('#athlete_positions').val(positions);
+      $('#athlete_mothers_name').val(mother);
+      $('#athlete_fathers_name').val(father);
+      $('#athlete_hudl_id').val(hudl_id);
+      $('#athlete_arms_id').val(arms_id);
+      $('#athlete_athlete_id').val(athlete_id);
+      $('#athlete_twitter_id').val(twitter_id);
+      $('#athlete_follow_on_twitter').val(follow);
+      $('#athlete_twitter_search').val(twitter_handle);
+
+
+
+      $('#save_athlete').prop('disabled', false);
+
+    } else {
+      // Set it to unchecked
+      clicked_checkbox.prop('checked', false);
+      // and clear inputs
+
+      $('#new_athlete_form').find('input, select, textarea').not('#athlete_phone, #athlete_twitter_search, #save_athlete').val('');
+      $('#save_athlete').prop('disabled', true);
+    }
+
+  });
+</script>

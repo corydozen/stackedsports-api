@@ -1,0 +1,155 @@
+<% board_upload = @board_upload %>
+<%= form_with(model: board_upload, local: true, id: 'import-board', multipart: true) do |form| %>
+  <% if board_upload.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(board_upload.errors.count, "error") %> prohibited this board_upload from being saved:</h2>
+
+      <ul>
+      <% board_upload.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<h1 class="title">Board Uploads</h1>
+
+<section class="accordions">
+  <div class="accordion is-info">
+    <div class="accordion-header toggle">
+      <p>Click to expand for instructions and notes</p>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content">
+        <div class="">
+          <ol>
+            <li>Select User from Dropdown</li>
+            <ol class="nested-child-list">
+              <li>The selected user will be used to find the team to apply boards & athletes to</li>
+            </ol>
+            <!-- <li>All existing boards for team will be deleted if option checked</li> -->
+            <!-- <li>All existing athletes for team will be deleted if option checked</li> -->
+            <li>Choose csv file to upload as Board</li>
+            <ol class="nested-child-list">
+              <li>Underscores and Hyphens in file name will be converted to spaces</li>
+              <ol class="nested-grandchild-list">
+                <li>i.e. example_board_name will become Example Board Name</li>
+              </ol>
+            </ol>
+            <li>Click Import button</li>
+            <li>A job will run every 15 minutes to pick any files to import</li>
+
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="field">
+<%= form.label 'Recruit Suite Users', class: 'label' %>
+<sup>We will use this user to find the team to associate records to...</sup>
+<br>
+<div class="select">
+<%= form.select :user_id, options_for_select( @rs_users.map{ |user| ["#{user.email.present? ? user.email : 'No Email Present'} - #{user.fullName}", user.id]}.sort{|a,b| a.to_s.sub( /^.*@/, '').downcase <=> b.to_s.sub( /^.*@/, '').downcase} ),
+include_blank: true %>
+</div>
+
+</div>
+
+<!-- <div class="field"> <%#= form.label 'Any email of a user on the team', class: 'label' %> <%#= form.email_field :user, class: 'input', placeholder: 'We will use this user to find the team to associate records to...' %> </div> -->
+
+<!-- <div class="field">
+<label class="checkbox">
+<%#= form.check_box :delete_boards, id: "delete_all_boards"%>
+Delete all existing boards for selected user's team
+</label>
+</div> -->
+
+<!-- <div class="field">
+<label class="checkbox">
+<%#= form.check_box :delete_athletes, id:"delete_all_athletes" %>
+Delete all existing athletes for selected user's team
+</label>
+</div> -->
+
+<div class="field">
+<div class="file is-info has-name">
+<label class="file-label">
+
+  <%= form.text_field :board, id: "file", class:"file-input", type:"file", accept:".csv", required: 'required' %>
+  <span class="file-cta">
+    <span class="file-icon">
+      <i class="fas fa-upload"></i>
+    </span>
+    <span class="file-label">
+      Click to choose Board file…
+    </span>
+  </span>
+  <span class="file-name" id="filename"></span>
+</label>
+</div>
+<sup>* File Name will be used as Board Name, so please ensure it is named correctly</sup>
+</div>
+
+<div class="field">
+<a href="https://s3.us-east-2.amazonaws.com/stakdsocial/board_uploads/example_board_name.csv">
+<sup>Click to download Sample Template</sup>
+</a>
+</div>
+
+<%= form.hidden_field :requestor, value: current_user.id %>
+
+<div class="actions">
+<%= form.submit 'Import', class: 'button is-primary is-outlined' %>
+<%= link_to 'Cancel', '#', class: 'button is-warning is-outlined cancel-upload' %>
+</div>
+<br>
+<article class="message is-small is-danger">
+  <div class="message-body">
+    This will update athlete and board records for the selected user's team.
+    <br>
+    <strong>Please double and triple check you have selected the right user, because there is no way for this process to know if it has the right user based on the file!</strong>
+  </div>
+</article>
+<% end %>
+
+<script type="text/javascript">
+  var file = document.getElementById("file");
+  file.onchange = function () {
+    if (file.files.length > 0) {
+
+      document.getElementById('filename').innerHTML = file.files[0].name;
+
+    }
+  };
+
+  $( document ).ready(function() {
+    var accordions = bulmaAccordion.attach();
+
+    // $('#import-board').one('submit',function (event) {
+    //   event.preventDefault();
+    //
+    //   boardMessage = true;
+    //   athleteMessage = true;
+    //   if ($('#delete_all_boards').prop("checked")) {
+    //     boardMessage = confirm("Are you sure you want to delete all existing boards?");
+    //   }
+    //
+    //   if ($('#delete_all_athletes').prop("checked")) {
+    //     athleteMessage = confirm("Are you sure you want to delete all existing athletes?");
+    //
+    //   }
+    //
+    //   console.log({boardMessage});
+    //   console.log({athleteMessage});
+    //
+    //   if (boardMessage && athleteMessage) {
+    //     $(this).submit();
+    //   } else {
+    //     return false;
+    //   }
+    //
+    // });
+  });
+</script>

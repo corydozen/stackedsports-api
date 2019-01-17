@@ -1,0 +1,61 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  id_str: MyString
+  created_at: MyString
+  text: MyString
+  truncated: false
+  source: MyString
+  in_reply_to_status_id: 1
+  in_reply_to_status_id_str: MyString
+  in_reply_to_user_id: 1
+  in_reply_to_user_id_str: MyString
+  in_reply_to_screen_name: MyString
+  twitter_profile: one
+  quoted_status_id: 1
+  quoted_status_id_str: MyString
+  is_quote_status: false
+  retweeted_status: 1
+  quote_count: 1
+  retweet_count: 1
+  favorite_count: 1
+  possibly_sensitive: false
+  filter_level: MyString
+  hashtags: MyString
+  urls: 
+  user_mentions: 
+  media: 
+  symbols: MyString
+  polls: MyString
+  lang: MyString
+
+two:
+  id: 1
+  id_str: MyString
+  created_at: MyString
+  text: MyString
+  truncated: false
+  source: MyString
+  in_reply_to_status_id: 1
+  in_reply_to_status_id_str: MyString
+  in_reply_to_user_id: 1
+  in_reply_to_user_id_str: MyString
+  in_reply_to_screen_name: MyString
+  twitter_profile: two
+  quoted_status_id: 1
+  quoted_status_id_str: MyString
+  is_quote_status: false
+  retweeted_status: 1
+  quote_count: 1
+  retweet_count: 1
+  favorite_count: 1
+  possibly_sensitive: false
+  filter_level: MyString
+  hashtags: MyString
+  urls: 
+  user_mentions: 
+  media: 
+  symbols: MyString
+  polls: MyString
+  lang: MyString

@@ -1,0 +1,12 @@
+<div class="athlete-list">
+  <%= render 'section_header' %>
+
+  <div class="columns is-marginless is-fullheight">
+    <div class="column is-paddingless">
+      <%= render 'athletes/athletes_table' %>
+    </div>
+    <div class="column is-3 is-paddingless is-fullheight athlete-filters" style='display:none;'>
+      <%= render 'athletes/filters' %>
+    </div>
+  </div>
+</div>

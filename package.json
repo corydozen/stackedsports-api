@@ -1,0 +1,7 @@
+{
+  "name": "twitter_api",
+  "private": true,
+  "dependencies": {
+    "jquery-awesome-cursor": "^0.3.1"
+  }
+}

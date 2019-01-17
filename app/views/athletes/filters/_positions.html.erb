@@ -1,0 +1,60 @@
+<div class="columns is-multiline is-mobile positions">
+  <!-- List top 6 states based on count then show more -->
+  <div class="column is-12 header">
+    Position
+  </div>
+
+  <% @offense_total.each do |pos_type, count| %>
+    <div class="column is-12 field">
+      <%= check_box_tag "position_type[]", pos_type, false, id: "pos_type_#{pos_type}", class: 'filter is-checkradio  is-info', data: {  url: athlete_filter_path, method: :post, position_type: pos_type } %>
+      <label for="pos_type_<%= pos_type %>">
+        <%= "Off (#{count})" %>
+      </label>
+    </div>
+  <% end if @offense_total.present? %>
+
+  <% @offense.each do |pos, count| %>
+    <div class="column field">
+      <%= check_box_tag 'position[]', pos, false, id: "pos_#{pos}", class: 'filter is-checkradio  is-info' , data: {  url: athlete_filter_path, method: :post, position: pos }%>
+      <label for="pos_<%= pos %>">
+        <%= "#{pos.upcase} (#{count})" %>
+      </label>
+    </div>
+  <% end if @offense %>
+
+  <% @defense_total.each do |pos_type, count| %>
+    <div class="column is-12 field">
+      <%= check_box_tag "position_type[]", pos_type, false, id: "pos_type_#{pos_type}", class: 'filter is-checkradio  is-info', data: {  url: athlete_filter_path, method: :post, position_type: pos_type } %>
+      <label for="pos_type_<%= pos_type %>">
+        <%= "Def (#{count})" %>
+      </label>
+    </div>
+  <% end if @defense_total.present? %>
+
+  <% @defense.each do |pos, count| %>
+    <div class="column field">
+      <%= check_box_tag 'position[]', pos, false, id: "pos_#{pos}", class: 'filter is-checkradio  is-info', data: {  url: athlete_filter_path, method: :post, position: pos } %>
+      <label for="pos_<%= pos %>">
+        <%= "#{pos.upcase} (#{count})" %>
+      </label>
+    </div>
+  <% end if @defense %>
+
+  <% @special_total.each do |pos_type, count| %>
+    <div class="column is-12 field">
+      <%= check_box_tag "position_type[]", pos_type, false, id: "pos_type_#{pos_type}", class: 'filter is-checkradio  is-info' , data: {  url: athlete_filter_path, method: :post, position_type: pos_type }%>
+      <label for="pos_type_<%= pos_type %>">
+        <%= "Spec (#{count})" %>
+      </label>
+    </div>
+  <% end if @special_total.present? %>
+
+  <% @special_teams.each do |pos, count| %>
+    <div class="column field">
+      <%= check_box_tag 'position[]', pos, false, id: "pos_#{pos}", class: 'filter is-checkradio  is-info', data: {  url: athlete_filter_path, method: :post, position: pos } %>
+      <label for="pos_<%= pos %>">
+        <%= "#{pos.upcase} (#{count})" %>
+      </label>
+    </div>
+  <% end if @special_teams %>
+</div>

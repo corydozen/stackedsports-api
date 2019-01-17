@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: MyString
+  board: 
+  delete_boards: false
+  delete_athletes: false
+  requestor: 1
+  processed: false
+
+two:
+  user_id: MyString
+  board: 
+  delete_boards: false
+  delete_athletes: false
+  requestor: 1
+  processed: false

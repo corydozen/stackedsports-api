@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @co_email_recipient.email %>
+</p>
+
+<p>
+  <strong>Full name:</strong>
+  <%= @co_email_recipient.full_name %>
+</p>
+
+<p>
+  <strong>Enabled:</strong>
+  <%= @co_email_recipient.enabled %>
+</p>
+
+<%= link_to 'Edit', edit_co_email_recipient_path(@co_email_recipient) %> |
+<%= link_to 'Back', co_email_recipients_path %>

@@ -1,0 +1,1 @@
+HEROKU_API_CLIENT = PlatformAPI.connect(ENV['API_KEY_FOR_HEROKU'])

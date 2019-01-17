@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  team: one
+  is_shared: false
+  filterable_type: MyString
+  criteria: MyString
+
+two:
+  user: two
+  team: two
+  is_shared: false
+  filterable_type: MyString
+  criteria: MyString

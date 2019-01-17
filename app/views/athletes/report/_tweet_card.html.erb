@@ -1,0 +1,19 @@
+<% tweet = nil if local_assigns[:tweet].nil? %>
+<% no_content_message = "No Content Found" %>
+  <div class="tweet-card">
+    <div class="details">
+      <div class="columns is-marginless">
+        <div class="column is-11 is-paddingless">
+          <span class="text"><%= tweet.present? ? auto_link(tweet.text) : no_content_message %></span>
+        </div>
+        <div class="column is-paddingless">
+          <%= (tweet.text.start_with?('RT @') ? icon('fal', 'retweet') : icon('fab', 'twitter')) if tweet.present? %>
+        </div>
+      </div>
+    </div>
+    <div class="level">
+      <div class="level-item date">
+        <%= tweet.created_at.strftime("%b #{tweet.created_at.day.ordinalize}, %Y") if tweet.present? %>
+      </div>
+    </div>
+  </div>

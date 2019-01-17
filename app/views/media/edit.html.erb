@@ -1,0 +1,106 @@
+<div class="media-list is-fullheight">
+  <%= render :partial => 'layouts/user_nav/header', :locals => {:title => 'Media Library', :icon => 'image', :headerclass => 'media-header'} %>
+  <%= form_for @medium do |f|%>
+    <div class="media-container" style="position: relative; margin-bottom: 100px;">
+      <div class="media-filter-icon-container">
+        <%= link_to "BACK", media_path, {"class": ["button", "media-edit-button"]}%>
+        <a href="#" class="button media-button-blue media-edit-button" id="media-edit-save-button" data-id="<%=@medium.id%>">SAVE</a>
+      </div>
+      <h2 class="all-media">Media Details</h2>
+      <hr class="media-dark">
+      <div class="columns">
+        <div class="column is-8">
+          <div class="media-edit-image-container">
+            <img src="<%= @medium.urls['original']%>" alt="<%=@medium[:name] %>" class="media-edit-image" />
+      </div>
+      <div class="media-activity-container">
+        <h2 class="media-activity-header">Media Activity</h2>
+        <div class="columns">
+          <div class="column">
+            <div class="has-text-centered has-text-weight-bold is-size-3">443</div>
+            <div class="has-text-centered">Sent via Twitter DMs</div>
+          </div>
+          <div class="column">
+            <div class="has-text-centered has-text-weight-bold is-size-3">56</div>
+            <div class="has-text-centered">Sent via Text</div>
+          </div>
+        </div>
+      </div>
+      <% @medium.messages[:list].each do |message| %>
+        <div class="media-message">
+          <div class="columns">
+            <div class="column is-10">
+              <div class="media-message-header">Message sent with media</div>
+              <div class="media-message-text"><%=message["body"] %></div>
+              <div class="media-message-detail-list columns">
+                <div class="column is-1"><i class="fab fa-twitter"></i></div>
+                <div class="column">Sent As: <span class="has-text-weight-bold">Twitter DM</span></div>
+              </div>
+              <div class="media-message-detail-list columns">
+                <div class="column is-1"><i class="far fa-user"></i></div>
+                <div class="column">Sender: <span class="has-text-weight-bold">Coach Charlie (@coachCharlie)</span></div>
+              </div>
+              <div class="media-message-detail-list columns">
+                <div class="column is-1"><i class="far fa-user"></i></div>
+                <div class="column">Recipient: <span class="has-text-weight-bold">2019 Elite (Board)</span></div>
+              </div>
+              <div class="media-message-sent-at">Message sent at <%= message["created_at"].strftime("%-m/%d/%y, %l:%M %p") %> by John Brown</div>
+            </div>
+            <div class="column is-2 has-text-right media-message-right-column">
+              <div class="media-message-status"><%= message["current_status"].upcase%></div>
+              <div class="media-message-progress-number">191 OF 213</div>
+              <div class="media-message-progress" style="background: linear-gradient(to right, yellow, 10%, green);"></div>
+              <div class="media-message-see-details"><%#TODO= link_to 'SEE DETAILS', url_for(controller: :message, action: :show, id: message["id"]) <%><a href="/messages/1">SEE DETAILS</a></%></div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="column is-4">
+    <div class="media-edit-details-container">
+      File name: <b><%= best_in_place @medium, :name %></b><br>
+      File type: <b><%= @medium.object_content_type %></b><br>
+      Uploaded on: <b><%= @medium.created_at %></b><br>
+      Uploaded by: <b><%= @medium.user.first_name + " " + @medium.user.last_name %></b><br>
+      File Size: <b><%= number_to_human_size(@medium.object_file_size) %></b><br>
+      Dimensions: <b>Not available</b>
+      <div id="media-edit-delete-container">
+        <%= link_to 'Delete permanently',url_for(action: :destroy, id: @medium.id),method: :destroy, data: {confirm: "Are you sure you want to delete?", id: "media-edit-delete-button"} %>
+      </div>
+    </div>
+    <div class="media-edit-tags-container">
+      Current Tags
+      <hr class="media-dark">
+      <div id="media-edit-current-tags">
+        <% @medium.tags_list.split(',').sort.each do |tag| %>
+          <input type="checkbox" class="media-edit-current-checkbox" checked id="media-edit-current-tag-<%= tag.sub ' ', '-' %>" data-value="<%=tag %>">
+          <label for="media-edit-current-tag-<%= tag.sub ' ', '-' %>"><%= tag %></label><br>
+        <% end %>
+        <%= @medium.tags_list == "" ? 'No current tags' : '' %>
+      </div>
+      <div class="media-edit-all-tags-container">
+        <div class="media-edit-all-tags-label">All Tags</div>
+        <div class="columns is-multiline" id="media-edit-tags">
+          <div class="column is-1">
+            <input type="checkbox" class="media-edit-tag-checkbox" id="media-edit-tag-new-checkbox" data-medium-id="<%=@medium.id%>">
+          </div>
+          <div class="column is-5">
+            <label for="media-edit-tag-new-checkbox"><input class="input media-input" type="text" id="media-edit-tag-new-text"></label>
+          </div>
+          <% current_user.teams.first.tags.sort { |a,b| a[:name] > b[:name] ? 1 : -1 }.each do |tag| %>
+            <div class="column is-1">
+              <input type="checkbox" class="media-edit-tag-checkbox" id="media-edit-tag-<%=tag.name.sub ' ', '-' %>-checkbox" <%= @medium.tags_list.split(',').select{ | search_tag | search_tag == tag.name }.length > 0 ? 'checked' : '' %> data-value="<%=tag.name %>" data-medium-id="<%=@medium.id%>">
+            </div>
+            <div class="column is-5">
+              <label for="media-edit-tag-<%=tag.name.sub ' ', '-'%>-checkbox"><%=tag.name %></label>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<% end %>
+</div>
+<%= render :partial => 'media/modals' %>

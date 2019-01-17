@@ -1,0 +1,162 @@
+<div class="admin container">
+
+  <h1 class="title">Commit/Offers items as of
+    <%= @as_of %></h1>
+  <%= form_tag delete_selected_co_path, method: :delete do %>
+  <div class="level">
+    <div class="level-left">
+      <%= link_to 'Add Commit/Offer Item', new_temp_commit_offer_path, class: 'button is-primary is-outlined new-button' %>
+      <%= submit_tag 'Delete all selected items', class: 'button is-danger is-outlined delete-selected' %>
+    </div>
+    <div class="level-right">
+      <%= link_to 'Preview Email', get_daily_co_email_path, class: 'button is-info is-outlined preview-button', target: '_blank' %>
+      <%= link_to 'Send Commit/Offer Email', send_daily_co_email_path, class: 'button is-warning is-outlined', data: { confirm: 'Have you reviewed the deleted list, because this is going to send an email?' }, method: :post, remote: true %>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <table class="table is-striped is-narrow is-hoverable">
+      <sup>Any field with an * can be edited in place by clicking the field</sup>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Organization*</th>
+          <th>Program name*</th>
+          <th>Recruit name</th>
+          <th>Position*</th>
+          <th>Grad year*</th>
+          <th>High school*</th>
+          <th>State*</th>
+          <th>Twitter handle</th>
+          <th>Tweet text</th>
+          <th>Tweet permalink</th>
+          <th>Tweet Date</th>
+          <th>Grouping*</th>
+          <th>Conference</th>
+          <!-- <th>Verified By*</th> -->
+          <th colspan="2"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @temp_commit_offers.each do |temp_commit_offer| %>
+          <tr>
+            <td><%= check_box_tag 'temp_commit_offer_ids[]', temp_commit_offer.id, nil, class: 'delete-select' %></td>
+            <td><%= best_in_place temp_commit_offer, :organization_id, as: :select, collection: Organization.all.order(:nickname).map {|org| [ org.id, org.nickname ] }.unshift([0, nil]), placeholder: '', include_blank: true, remote: true %></td>
+            <td><%= best_in_place temp_commit_offer, :program_name, as: :input, remote: true %></td>
+            <td><%= temp_commit_offer.recruit_name %></td>
+            <td><%= best_in_place temp_commit_offer, :position, as: :input, remote: true %></td>
+            <td><%= best_in_place temp_commit_offer, :grad_year, as: :input, remote: true %></td>
+            <td><%= best_in_place temp_commit_offer, :high_school, as: :input, remote: true %></td>
+            <td><%= best_in_place temp_commit_offer, :state, as: :input, remote: true %></td>
+            <td><%= temp_commit_offer.twitter_handle %></td>
+            <td><%= auto_link(temp_commit_offer.tweet_text) %></td>
+            <td>
+              <a href="<%= temp_commit_offer.tweet_permalink %>" target="_blank">Tweet</a>
+            </td>
+            <td><%= local_time(temp_commit_offer.created_at, '%b %e, %Y %l:%M%P') %></td>
+            <td><%= best_in_place temp_commit_offer, :grouping, as: :select, collection: CoEmailGrouping.all.map{ |grp| [grp.description, grp.description]}, remote: true %></td>
+            <td><%= temp_commit_offer.conference %></td>
+            <!-- <td><%#= best_in_place temp_commit_offer, :verified_by, as: :input, remote: true %></td> -->
+            <td>
+              <%= link_to edit_temp_commit_offer_path(temp_commit_offer) do %>
+              <span class="icon has-text-info">
+                <i class="fas fa-edit"></i>
+              </span>
+            <% end %>
+          </td>
+          <td><%= link_to temp_commit_offer, method: :delete do%>
+            <span class="icon has-text-danger">
+              <i class="fas fa-trash-alt"></i>
+            </span>
+          <% end %>
+        </td>
+      </tr>
+      <% end if @temp_commit_offers%>
+      </tbody>
+    </table>
+    <div class="level">
+      <div class="level-left">
+        <%= submit_tag 'Delete all selected items', class: 'button is-danger is-outlined delete-selected' %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<br>
+
+<hr>
+
+<h1 class="title">Deleted Commit/Offers items</h1>
+<div class="content">
+  <table class="table is-striped is-narrow is-hoverable">
+    <thead>
+      <tr>
+        <th>Program name</th>
+        <th>Recruit name</th>
+        <th>Position</th>
+        <th>Grad year</th>
+        <th>High school</th>
+        <th>State</th>
+        <th>Twitter handle</th>
+        <th>Tweet text</th>
+        <th>Tweet permalink</th>
+        <th>Conference</th>
+        <th>Verified By</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @deleted_commit_offers.each do |temp_commit_offer| %>
+        <tr>
+          <td><%= temp_commit_offer.program_name %></td>
+          <td><%= temp_commit_offer.recruit_name %></td>
+          <td><%= temp_commit_offer.position %></td>
+          <td><%= temp_commit_offer.grad_year %></td>
+          <td><%= temp_commit_offer.high_school %></td>
+          <td><%= temp_commit_offer.state %></td>
+          <td><%= temp_commit_offer.twitter_handle %></td>
+          <td><%= auto_link(temp_commit_offer.tweet_text) %></td>
+          <td>
+            <a href="<%= temp_commit_offer.tweet_permalink %>" target="_blank">Tweet</a>
+          </td>
+          <td><%= temp_commit_offer.conference %></td>
+          <td><%= temp_commit_offer.verified_by %></td>
+          <td>
+            <%= link_to edit_temp_commit_offer_path(temp_commit_offer) do %>
+            <span class="icon has-text-info">
+              <i class="fas fa-edit"></i>
+            </span>
+          <% end %>
+        </td>
+        <td><%= link_to temp_commit_offer, method: :delete do%>
+          <span class="icon has-text-success">
+            <i class="fas fa-plus"></i>
+          </span>
+        <% end %>
+      </td>
+    </tr>
+    <% end if @deleted_commit_offers %>
+    </tbody>
+  </table>
+</div>
+
+</div>
+
+<script type="text/javascript">
+$( document ).ready(function() {
+  ready();
+});
+
+var ready = function() {
+  /* Activating Best In Place */
+  jQuery(".best_in_place").best_in_place();
+
+  var boxes = $('.delete-select');
+
+  boxes.on('change', function () {
+    $('.delete-selected').prop('disabled', !boxes.filter(':checked').length);
+  }).trigger('change');
+}
+</script>

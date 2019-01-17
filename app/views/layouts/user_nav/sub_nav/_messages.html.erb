@@ -1,0 +1,48 @@
+<div class="sub-nav-messages">
+	<div class="new-message">
+		<%= link_to '+ New Message', new_message_path, class: 'white-link' %>
+	</div>
+	
+	<div class="inbox">
+   	<section class="section is-paddingless">
+	      <div class="label has-text-white">
+	        <%= link_to "Inbox", inbox_path, class: 'has-text-white' %>
+	      </div>
+	      <ul class="accounts-list">
+	        <!-- TODO: this should just be a loop over the users private boards -->
+	        <%= link_to "You (35)", '#', class: 'white-link' %><br>
+	        <span class="icon has-text-info"><i class="fab fa-twitter"></i></span> <%= link_to "Hawks Recreation (42)", '#', class: 'white-link' %><br>
+	        <span class="icon has-text-info"><i class="fab fa-twitter"></i></span> <%= link_to "Coach Jones (83)", '#', class: 'white-link' %>
+	      </ul>
+		</section>
+		<section class="section is-paddingless">
+			<div class="label has-text-white">
+	        Drafts (2)
+	      </div>
+		</section>
+		<section class="section is-paddingless">
+	      <div class="label has-text-white">
+	        Approvals
+	      </div>
+	      <ul class="accounts-list">
+	        <!-- TODO: this should just be a loop over the users private boards -->
+	        <%= link_to "Awaiting You (1)", '#', class: 'white-link' %><br>
+	        <%= link_to "Pending (3)", '#', class: 'white-link' %><br>
+	        <%= link_to "Declined (2)", '#', class: 'white-link' %>
+	      </ul>
+		</section>
+		<section class="section is-paddingless">
+	      <div class="label has-text-white">
+	        Message Queue (12)
+	      </div>
+	      <ul class="accounts-list">
+	        <!-- TODO: this should just be a loop over the users private boards -->
+	        <%= link_to "Scheduled", '#', class: 'white-link' %><br>
+	        <%= link_to "In Progress", '#', class: 'white-link' %><br>
+	        <%= link_to "Finished", '#', class: 'white-link' %>
+	      </ul>
+		</section>
+  </div>
+
+
+</div>

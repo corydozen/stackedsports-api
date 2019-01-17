@@ -1,0 +1,58 @@
+<% qc = nil if local_assigns[:qc].nil? %>
+<% ql = nil if local_assigns[:ql].nil? %>
+<% tweet_items = 2 if local_assigns[:tweet_items].nil? %>
+<div class="questionable-content">
+  <div class="tweets">
+
+    <div class="level">
+      <div class="level-item">
+        <div class="header">
+          Questionable Tweets & Retweets
+        </div>
+      </div>
+    </div>
+    <% if qc.present? %>
+    <div class="columns is-multiline is-desktop">
+      <% qc.each_with_index do |tweet, index| %>
+      <div class="column qc <%= 'is-hidden' if index > tweet_items %>">
+        <%= render 'athletes/report/tweet_card', tweet: tweet %>
+      </div>
+      <% end %>
+    </div>
+    <div class="level">
+      <div class="level-item">
+        <%= link_to('View More', '#', class: 'white-link', id: 'view-more-qc') if qc.count > 3 %>
+      </div>
+    </div>
+    <% else %>
+      <%= render 'athletes/report/tweet_card' %>
+    <% end %>
+  </div>
+
+  <div class="likes">
+    <div class="level">
+      <div class="level-item">
+        <div class="header">
+          Questionable "Likes"
+        </div>
+      </div>
+    </div>
+    <% if ql.present? %>
+    <div class="columns is-multiline is-desktop">
+      <% ql.each_with_index do |tweet, index| %>
+      <div class="column ql <%= 'is-hidden' if index > tweet_items %>">
+        <%= render 'athletes/report/tweet_card', tweet: tweet %>
+      </div>
+      <% end %>
+      </div>
+      <div class="level">
+        <div class="level-item">
+          <%= link_to('View More', '#', class: 'white-link', id: 'view-more-ql') if ql.count > 3 %>
+        </div>
+      </div>
+
+    <% else %>
+      <%= render 'athletes/report/tweet_card' %>
+    <% end %>
+  </div>
+</div>

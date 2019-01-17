@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Co Email Recipients</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Full name</th>
+      <th>Enabled</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @co_email_recipients.each do |co_email_recipient| %>
+      <tr>
+        <td><%= co_email_recipient.email %></td>
+        <td><%= co_email_recipient.full_name %></td>
+        <td><%= co_email_recipient.enabled %></td>
+        <td><%= link_to 'Show', co_email_recipient %></td>
+        <td><%= link_to 'Edit', edit_co_email_recipient_path(co_email_recipient) %></td>
+        <td><%= link_to 'Destroy', co_email_recipient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Co Email Recipient', new_co_email_recipient_path %>

@@ -1,0 +1,71 @@
+<div class="conversation-header">
+</div>
+
+<div class="conversation">
+  <% if conversation[:messages].present? %>
+    <% conversation[:messages].each do |msg| %>
+    <div class="is-clearfix">
+    <div class="msg">
+      <% if msg['direction'] == 'in' %>
+        <%= render 'athletes/conversation/inbound', profile_image: conversation[:athlete_profile_image], msg: msg %>
+      <% else %>
+        <%= render 'athletes/conversation/outbound', profile_image: conversation[:coach_profile_image], msg: msg %>
+      <% end %>
+    </div>
+    </div>
+    <% end %>
+  <% else %>
+    <div class="no-messages">
+      Looks like you haven't talked to this Athlete
+    </div>
+  <% end %>
+</div>
+
+<div class="new-conversation">
+  <%= form_with(model: @message, local: true) do |form| %>
+    <% if @message.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
+
+        <ul>
+        <% @message.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label 'Send As:' %>
+      <%= form.select :platform_id, options_for_select(Platform.all.map{ |p| [p.name, p.id]}), class: 'select' %>
+    </div>
+
+    <div class="field">
+      <%= form.label 'From:' %>
+      <%= form.select :user_id, options_for_select(current_user.team_mates.all.map{ |tm| ["#{tm.user.first_name} #{tm.user.last_name}", tm.user.id]}), class: 'select' %>
+    </div>
+
+    <div class="field">
+      Media Preview goes here...
+    </div>
+
+    <div class="field">
+      <%= form.text_area :body, class: 'input' %>
+    </div>
+
+
+
+    <div class="actions">
+      <div class="name-placeholder">
+        Use ::name:: to insert athlete's name
+      </div>
+      <div class="media-selector">
+        <%= icon('fal', 'camera-alt') %>
+      </div>
+      <div class="scheduler">
+        <%= icon('fal', 'clock') %>
+      </div>
+      <%= form.submit 'Send'%>
+    </div>
+  <% end %>
+</div>

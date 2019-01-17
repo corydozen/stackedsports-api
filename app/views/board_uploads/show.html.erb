@@ -1,0 +1,33 @@
+
+<p>
+  <strong>User:</strong>
+  <%= @board_upload.user_id %>
+</p>
+
+<p>
+  <strong>Board:</strong>
+  <%= @board_upload.board %>
+</p>
+
+<p>
+  <strong>Delete boards:</strong>
+  <%= @board_upload.delete_boards %>
+</p>
+
+<p>
+  <strong>Delete athletes:</strong>
+  <%= @board_upload.delete_athletes %>
+</p>
+
+<p>
+  <strong>Requestor:</strong>
+  <%= @board_upload.requestor %>
+</p>
+
+<p>
+  <strong>Processed:</strong>
+  <%= @board_upload.processed %>
+</p>
+
+<%= link_to 'Edit', edit_board_upload_path(@board_upload) %> |
+<%= link_to 'Back to list', board_uploads_path %>

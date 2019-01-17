@@ -1,0 +1,25 @@
+.admin_flashes {
+  position: relative;
+  right: 50px;
+  max-width: 600px;
+
+  .notification {
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+    // margin-top: 0.2rem;
+    max-height: 46px;
+  }
+}
+
+
+.flashes {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  max-width: 600px;
+
+  .notification {
+    // padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+    // // margin-top: 0.2rem;
+    // max-height: 46px;
+  }
+}

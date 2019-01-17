@@ -1,0 +1,76 @@
+<%= form_with(model: team, local: true) do |form| %>
+  <% if team.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(team.errors.count, "error") %> prohibited this team from being saved:</h2>
+
+      <ul>
+      <% team.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name, class: 'label' %>
+    <%= form.text_field :name, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :photo_url, class: 'label' %>
+    <%= form.text_field :photo_url, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone, class: 'label' %>
+    <%= form.text_field :phone, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :trial_start_date, class: 'label' %>
+    <%= form.date_field :trial_start_date, class: 'input', id: 'datepicker' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :override_plan_id, class: 'label' %>
+    <%= form.text_field :override_plan_id, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :organization_id, class: 'label' %>
+    <div class="select">
+      <%= form.select :organization_id, options_for_select(Organization.all.map{ |org| [org.name, org.id]}, selected: @team.organization_id), include_blank: true %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :conference_id, class: 'label' %>
+    <div class="select">
+      <%= form.select :conference_id, options_for_select(Conference.all.map{ |conf| [conf.name, conf.id]}, selected: @team.conference_id), include_blank: true %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :division, class: 'label' %>
+    <%= form.text_field :division, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :stripe_subscription_id, class: 'label' %>
+    <%= form.text_field :stripe_subscription_id, class: 'input' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: 'button is-primary' %>
+  </div>
+<% end %>
+
+<script>
+  $( function() {
+    $( "#datepicker" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+      dateFormat: 'yy-mm-dd'
+    });
+  } );
+  </script>

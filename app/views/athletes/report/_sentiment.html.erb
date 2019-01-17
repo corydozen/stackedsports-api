@@ -1,0 +1,51 @@
+<div class="sentiment">
+  <div class="header">
+    <div class="level">
+      <div class="level-item">
+        Sentiment & Questionable Content
+      </div>
+    </div>
+  </div>
+  <% sentiment = AthleteReport.sentiment_analysis(@athlete.athlete) %>
+  <div class="sentiment-details">
+    <div class="level">
+      <div class="level-item">
+      <% color = case sentiment[:sentiment].to_s.downcase
+          when 'positive'
+            'has-text-success'
+          when 'negative'
+            'has-text-danger'
+          when 'neutral'
+            'has-text-info'
+          when 'mixed'
+            'has-text-warning'
+          end %>
+        <span class="sentiment-label">Social media sentiment:</span>
+        <span class="<%= color %>"><%= sentiment[:sentiment] %></span>
+      </div>
+    </div>
+
+    <% sentiment[:chart_data].each do |cd| %>
+    <div class="level">
+      <div class="level-item">
+        <span class="sentiment-detail-label"><%= cd[:name].to_s.titleize %>:</span>
+      </div>
+    </div>
+    <div class="level">
+      <div class="level-item">
+        <% color = case cd[:name].to_s.downcase
+            when 'positive'
+              'is-success'
+            when 'negative'
+              'is-danger'
+            when 'neutral'
+              'is-info'
+            when 'mixed'
+              'is-warning'
+            end %>
+          <progress class="progress <%= color %>" value="<%= "#{cd[:data] * 100}" if cd[:data].present? %>" max="100"></progress>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

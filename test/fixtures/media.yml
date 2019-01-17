@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  file_type: MyString
+  size: 1
+  file: MyString
+  twitter_media_id: MyString
+
+two:
+  name: MyString
+  file_type: MyString
+  size: 1
+  file: MyString
+  twitter_media_id: MyString

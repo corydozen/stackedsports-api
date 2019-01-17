@@ -1,0 +1,20 @@
+<div class="user-profile stay-open" style="display:none;">
+  <% if logged_in? %>
+  <p class="control">
+    <%= link_to logout_path, method: :post, class:'button'  do %>
+
+      <span class="icon">
+        <i class="fas fa-sign-out-alt"></i>
+      </span>
+      <span>
+        Log Out
+      </span>
+
+    <% end %>
+    <div class="grey-text">
+    <%= current_user.email %>  
+    </div>
+
+  </p>
+  <% end %>
+</div>

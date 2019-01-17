@@ -1,0 +1,99 @@
+<%= simple_form_for(organization, local: true, html: { multipart: true }) do |form| %>
+  <% if organization.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(organization.errors.count, "error") %> prohibited this organization from being saved:</h2>
+
+      <ul>
+      <% organization.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name, class: 'label' %>
+    <%= form.text_field :name, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone, class: 'label' %>
+    <%= form.text_field :phone, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address, class: 'label' %>
+    <%= form.text_field :address, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address_2, class: 'label' %>
+    <%= form.text_field :address_2, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :city, class: 'label' %>
+    <%= form.text_field :city, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state, class: 'label' %>
+    <%= form.text_field :state, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :zip, class: 'label' %>
+    <%= form.text_field :zip, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :stripe_customer_id, class: 'label' %>
+    <%= form.text_field :stripe_customer_id, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :primary_color, class: 'label' %>
+    <%= form.color_field :primary_color, as: :minicolors %>
+  </div>
+
+  <div class="field">
+    <%= form.label :secondary_color, class: 'label' %>
+    <%= form.color_field :secondary_color, as: :minicolors %>
+  </div>
+
+  <div class="field">
+    <%= form.label :logo, class: 'label' %>
+    <%= form.file_field :logo, id:'logo_upload' %>
+  </div>
+  <%= image_tag organization.logo.url(:thumb), id:"logo_preview"%>
+
+  <div class="actions">
+    <%= form.submit class: 'button is-primary' %>
+  </div>
+<% end %>
+
+
+<script>
+  $( document ).ready(function() {
+    $('#organization_primary_color').minicolors();
+    $('#organization_secondary_color').minicolors();
+  });
+  function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+      f=files[0]
+      // Only process image files.
+      if (f.type.match('image.*')) {
+        var reader = new FileReader();
+        reader.onload = (function(theFile) {
+          return function(e) {
+            // alert(e.target.result);
+            document.getElementById("logo_preview").src=e.target.result;
+          };
+        })(f);
+
+      // Read in the image file as a data URL.
+      reader.readAsDataURL(f);
+      }
+    }
+  document.getElementById('logo_upload').addEventListener('change', handleFileSelect, false);
+</script>

@@ -1,0 +1,56 @@
+
+<div class="sub-nav-athletes">
+
+  <div class="new-message">
+    <%= link_to "+ New message", '#' %>
+  </div>
+  <div class="all-athletes">
+    <%= link_to "All Athletes", athletes_path, class: 'white-link' %>
+  </div>
+
+  <div class="boards">
+
+    <div class="private">
+      <div class="label">
+        Private Boards
+      </div>
+      <div class="private-boards">
+        <div class="columns is-multiline">
+        <% current_user.filters.where(filterable_type: 'TeamAthlete').is_private.each do |filter| %>
+        <div class="column is-10 has-text-left filter-item">
+          <%= link_to filter.name, athlete_filter_path(filter: filter.hashid), class: 'white-link', method: :post, remote: true %>
+        </div>
+        <div class="column filter-menu" style="display: none;">
+          <%= icon('fal', 'ellipsis-v fa-2x') %>
+        </div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="shared">
+      <div class="label">
+        Shared Boards
+      </div>
+      <div class="shared-boards">
+        <div class="columns is-multiline">
+        <% current_user.filters.where(filterable_type: 'TeamAthlete').is_public.each do |filter| %>
+        <div class="column is-10 has-text-left filter-item">
+          <%= link_to filter.name, athlete_filter_path(filter: filter.hashid), class: 'white-link', method: :post, remote: true %>
+        </div>
+        <div class="column filter-menu" style="display: none;">
+          <%= icon('fal', 'ellipsis-v fa-2x') %>
+        </div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $('.filter-item').hover(function(){
+    $(this).sibling('.filter-menu').toggle();
+  });
+</script>

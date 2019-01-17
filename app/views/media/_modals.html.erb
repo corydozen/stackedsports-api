@@ -1,0 +1,94 @@
+<div class="modal" id="media-upload-modal" data-no-turbolink>
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head media-modal-card-first-header">
+      <p class="modal-card-title">UPLOAD MEDIA</p>
+      <button class="delete" id="media-upload-modal-close" class="modal-close" aria-label="close"></button>
+    </header>
+    <header class="modal-card-head media-modal-card-second-header">
+      <div class="columns">
+        <div class="column is-4 has-text-weight-bold" data-step="1">
+          <div class="media-modal-circle">
+            <span class="fa-stack">
+              <i class="fa fa-circle-o fa-stack-2x"></i>
+              <span class="step-text">1</span>
+            </span>
+          </div>
+          <div class="media-circle-label">Select Media</div>
+        </div>
+        <div class="column is-4 pl-25" data-step="2">
+          <div class="media-modal-circle">
+            <span class="fa-stack">
+              <i class="fa fa-circle-o fa-stack-2x"></i>
+              <span class="step-text">2</span>
+            </span>
+          </div>
+          <div class="media-circle-label">Set Tags</div>
+        </div>
+        <div class="column is-4" data-step="3">
+          <div class="media-modal-circle">
+            <span class="fa-stack">
+              <i class="fa fa-circle-o fa-stack-2x"></i>
+              <span class="step-text">3</span>
+            </span>
+          </div>
+          <div class="media-circle-label">Review</div>
+        </div>
+      </div>
+    </header>
+    <div class="modal-card-body-container">
+      <section class="modal-card-body has-text-centered" id="media-upload-modal-drop-area">
+        <form onkeypress="return event.keyCode != 13;">
+          <div data-step="1" class="media-upload-modal-step-container">
+            <input type="file" id="fileElem" multiple accept="image/*|video/*" onchange="handleFiles(this.files)">
+            <div id="media-upload-modal-no-files" class="">
+              <i class="far fa-image fa-4x icon"></i>
+              <div class="media-modal-drag-and-drop-text">Drag and drop media here<br>
+                <br>
+                OR</div>
+              <div id="media-modal-add-media-button-container">
+              </div>
+            </div>
+            <div id="media-upload-modal-has-files" class="is-hidden">
+            </div>
+            <label for="fileElem" class="button media-button media-modal-button media-button-blue">ADD MEDIA</label>
+          </div>
+          <div data-step="2" class="media-upload-modal-step-container is-hidden">
+            <h3 class="has-text-left">All Tags</h3>
+            <hr class="media-light">
+            <div class="columns is-multiline">
+              <div class="column is-1">
+                <input type="checkbox" id="media-upload-tag-new-checkbox" class="media-upload-tag">
+              </div>
+              <div class="column is-2 has-text-left">
+                <label for="media-upload-tag-new-checkbox"><input class="input" type="text" id="media-upload-tag-new-text"></label>
+              </div>
+              <% current_user.teams.first.tags.each_with_index do |tag, i| %>
+                <div class="column is-1">
+                  <input type="checkbox" id="media-upload-tag-<%=i%>" class="media-upload-tag" data-value="<%= tag.name %>">
+                </div>
+                <div class="column is-2 has-text-left">
+                  <label for="media-upload-tag-<%=i%>"><%=tag.name%></label>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <div data-step="3" class="media-upload-modal-step-container has-text-left is-hidden">
+            <h3>Media Files</h3>
+            <hr class="media-light" />
+            <div id="media-upload-review-number-of-files">Files</div>
+            <h3>Tags Selected</h3>
+            <hr class="media-light">
+            <div id="media-upload-review-selected-tags" class="columns is-multiline">
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
+    <footer class="modal-card-foot">
+      <button class="media-button media-modal-button media-upload-modal-previous is-hidden">PREVIOUS</button>
+      <button id="media-upload-modal-next" class="media-button media-modal-button media-button-blue media-upload-modal-next" disabled>NEXT</button>
+      <button id="media-upload-modal-upload" class="media-button media-modal-button media-button-blue media-upload-modal-next is-hidden">UPLOAD</button>
+    </footer>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<div id="new-athlete-modal" class="modal">
+<div class="modal-background"></div>
+<div class="modal-card">
+  <header class="modal-card-head">
+    <p class="modal-card-title"></p>
+  </header>
+  <section class="modal-card-body is-paddingless">
+    <div class="columns is-marginless">
+      <div class="column is-paddingless is-12 has-text-left new-athlete-form">
+        <%= render 'form', athlete: @athlete %>
+      </div>
+      <div class="column is-paddingless new-athlete-search-results" style="display: none;">
+        <div class="new-athlete-search">
+          <%= form_tag(athletes_search_path, method: :post, remote: true, authenticity_token: true, id: 'new-athlete-search-form') do %>
+          <div class="field is-grouped">
+            <%= button_tag type: 'submit', name: '', class: "button is-rounded search-submit" do %>
+              <i class="fas fa-search"></i>
+            <% end %>
+          <%= text_field_tag :search, params[:search], class: 'input is-rounded', readonly: true , id: 'athlete_search'  %>
+          <% end %>
+        </div>
+        <div id="athlete-search-results">
+          <%= render 'new_athlete_search', results: @results %>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- <footer class="modal-card-foot">
+    <button class="button is-success">Save changes</button>
+    <button class="button">Cancel</button>
+  </footer> -->
+</div>
+</div>
+
+
+<script type="text/javascript">
+  $( document ).ready(function() {
+    $('.close').click(function () {
+      $('#new-athlete-modal').removeClass('is-active');
+
+    });
+  });
+</script>

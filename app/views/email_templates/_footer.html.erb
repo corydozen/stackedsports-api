@@ -1,0 +1,88 @@
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<!-- End One Column -->
+<!-- ************************************************************** Fine Print ************************************************************** -->
+<% if fine_print.present? %>
+<tr>
+<td class="one-column">
+<table width="100%" style="<%= render 'email_templates/table_style' %>">
+<tr>
+<td style="padding: 4%; text-align:center; font-size:10px; color: #979797; line-height:14px;">
+  <%= fine_print %>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<% end %>
+<!-- End Fine Print -->
+<!-- ************************************************************** Footer ************************************************************** -->
+<tr>
+<td class="one-column" style="background-color: #1D262F;">
+<table width="100%" style="<%= render 'email_templates/table_style' %>">
+<tbody>
+
+<tr>
+<td valign="middle" width="200" style="padding: 16px 0; text-align:center; line-height: 0;" class="stack-column-center">
+  <a href="https://app.recruitsuite.co?utm_source=application&utm_medium=email&utm_campaign=<%= campaign %>&utm_content=<%= campaign_content %>">
+    <img src="https://s3.us-east-2.amazonaws.com/stakdsocial/media/emails/rs_logo_white.png" alt="Recruit Suite" width="200" style="margin: auto;">
+  </a>
+</td>
+</tr>
+<tr>
+<td>
+  Powered by
+  <a href="http://stackedsports.com">StackedSports.com</a>
+</td>
+</tr>
+<tr>
+<td
+  style="text-align:center; padding: 0 0 0 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 400; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased;line-height: 26px; color: #5a6066;">
+  <span class="mobile-link--footer">901 Woodland Street, Nashville, TN 37206</span>
+  <br>
+</td>
+</tr>
+<tr>
+<td
+  style="text-align:center; padding: 0 0 12px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 400; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased;line-height: 26px; color: #5a6066;">
+  <span class="mobile-link--footer">
+    <a href="mailto:info@stackedsports.com">info@stackedsports.com</a>
+  </span>
+  <br>
+</td>
+</tr>
+<tr>
+<td
+  style="text-align:center; padding: 0 0 16px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased;line-height: 26px; color: #5a6066;">
+  <a class="mobile-link--footer" href="https://twitter.com/stackedsports" style="padding: 0 5px"><img src="https://s3.us-east-2.amazonaws.com/stakdsocial/media/emails/gutter-twitter.png" alt="Twitter" height="18" style="margin: auto;"></a>
+  <a class="mobile-link--footer" href="https://instagram.com/stackedsports" style="padding: 0 5px"><img src="https://s3.us-east-2.amazonaws.com/stakdsocial/media/emails/gutter-instagram.png" alt="Instagram" height="18" style="margin: auto;"></a>
+</td>
+</tr>
+<tr>
+<td>
+  <img src="https://s3.us-east-2.amazonaws.com/stakdsocial/media/emails/footer_separator.png">
+</td>
+</tr>
+<tr>
+<td
+  style="text-align:center; padding: 0 0 12px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 400; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased;line-height: 26px; color: #5a6066;">
+  <span class="mobile-link--footer">
+    Copyright ©
+    <%= Time.now.year %>
+    STACKED SPORTS LLC, All rights reserved.
+  </span>
+  <br>
+</td>
+</tr>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<!-- End Footer -->
+</table>
+<%= render 'email_templates/mso_table_wrapper_below' %>
+</div></center> </body></html>

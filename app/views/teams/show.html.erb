@@ -1,0 +1,46 @@
+<div class="container">
+
+
+
+<h1 class="title">
+  <%= @team.organization.name %> - <%= @team.name %>
+</h1>
+
+<p>
+  <strong>Conference:</strong>
+  <%= @team.conference.name if @team.conference.present? %>
+</p>
+
+<p>
+  <strong>Division:</strong>
+  <%= @team.division %>
+</p>
+
+<p>
+  <strong>Photo url:</strong>
+  <%= @team.photo_url %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @team.phone %>
+</p>
+
+<p>
+  <strong>Trial start date:</strong>
+  <%= @team.trial_start_date.to_date %>
+</p>
+
+<p>
+  <strong>Override plan:</strong>
+  <%= @team.override_plan_id %>
+</p>
+
+<p>
+  <strong>Stripe subscription:</strong>
+  <%= @team.stripe_subscription_id %>
+</p>
+
+<%= link_to 'Edit', edit_team_path(@team) %> |
+<%= link_to 'Back', teams_path %>
+</div>

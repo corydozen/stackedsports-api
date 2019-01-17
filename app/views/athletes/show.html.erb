@@ -1,0 +1,13 @@
+<div class="athlete">
+  <div class="columns is-fullheight">
+    <div class="column is-3 is-paddingless athlete-profile">
+      <%= render 'athletes/profile', athlete: @athlete %>
+    </div>
+    <div class="column is-6 athlete-conversation">
+      <%= render 'athletes/conversation/conversation', conversation: @conversation %>
+    </div>
+    <div class="column is-3 is-paddingless is-fullheight athlete-report">
+      <%= render 'athletes/report/report', items: 1, tweet_items: nil %>
+    </div>
+  </div>
+</div>

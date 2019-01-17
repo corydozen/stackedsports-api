@@ -1,0 +1,47 @@
+<div class="container">
+  <h1 class="title">Stacked Sports Admin</h1>
+
+<div class="tile is-ancestor">
+  <div class="tile is-vertical is-4">
+  <div class="tile">
+    <div class="tile is-parent is-vertical">
+      <article class="tile is-child notification is-primary">
+        <p class="title">Active Users</p>
+        <table class="table">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Last Activity</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @current_users.each do |user| %>
+          <tr>
+            <td><%= user.first_name %> <%= user.last_name %></td>
+            <td><%= TimeDifference.between(user.last_activity_at, Time.now).humanize %> Ago</td>
+          </tr>
+          <% end if @current_users %>
+        </tbody>
+      </table>
+      </article>
+      <!-- <article class="tile is-child notification is-warning">
+        <p class="title">...tiles</p>
+        <p class="subtitle">Bottom tile</p>
+      </article> -->
+    </div>
+
+  </div>
+  <!-- <div class="tile is-parent">
+    <article class="tile is-child notification is-danger">
+      <p class="title">Wide tile</p>
+      <p class="subtitle">Aligned with the right tile</p>
+      <div class="content">
+      </div>
+    </article>
+  </div> -->
+</div>
+
+</div>
+
+</div>

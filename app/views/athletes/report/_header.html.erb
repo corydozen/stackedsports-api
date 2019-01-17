@@ -1,0 +1,28 @@
+<% show_header = true if local_assigns[:show_header].nil? %>
+<% if show_header %>
+<div class="report-header is-clearfix">
+  <div class="is-pulled-left">
+    <%= icon('fal', 'angle-left expand-report') %>
+    <%= icon('fal', 'angle-right expand-report', style:"display: none;") %>
+  </div>
+  <div class="is-pulled-right">
+    <%= link_to athlete_report_path(athlete_id: @athlete.as_json[:id]), target: '_blank' do %>
+      <%= icon('fal', 'chart-line') %>
+    <% end %>
+  </div>
+</div>
+<% end %>
+
+<script type="text/javascript">
+$(document).ready(function () {
+  $('.expand-report').click(function () {
+    $('.athlete-conversation').toggle();
+    $('.expand-report').toggle();
+    if ($('.athlete-report').hasClass('is-9')) {
+      $('.athlete-report').removeClass('is-9')
+    } else {
+      $('.athlete-report').addClass('is-9')
+    }
+  });
+});
+</script>

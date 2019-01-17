@@ -1,0 +1,108 @@
+<%= form_with(model: temp_athlete, local: true) do |form| %>
+  <% if temp_athlete.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(temp_athlete.errors.count, "error") %> prohibited this temp_athlete from being saved:</h2>
+
+      <ul>
+      <% temp_athlete.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :first_name, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :first_name, class: 'input' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_name, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :last_name, class: 'input' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :grad_year, class: 'label' %>
+    <div class="control">
+      <%= form.number_field :grad_year, class: 'input' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :positions, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :positions, class: 'input' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :address, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :address, class: 'input' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :state, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :state, class: 'input' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :city, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :city, class: 'input' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :zip_code, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :zip_code, class: 'input' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :twitter_handle, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :twitter_handle, class: 'input' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :mobile, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :mobile, class: 'input' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :email, class: 'label' %>
+    <div class="control">
+      <%= form.email_field :email, class: 'input' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :hs_name, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :hs_name, class: 'input' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :hs_state, class: 'label' %>
+    <div class="control">
+      <%= form.text_field :hs_state, class: 'input' %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: 'button is-primary'%>
+  </div>
+<% end %>

@@ -1,0 +1,44 @@
+<nav class="level section-header athletes-list">
+  <%= render 'layouts/user_nav/sub_nav_toggle' %>
+  <div class="level-item has-text-centered">
+    <%= link_to "ADD ATHLETE", "#", class: 'button is-info is-rounded add-athlete-button' %>
+    <%= render 'new_athlete_modal' %>
+  <!-- </div>
+  <div class="level-item has-text-centered"> -->
+    <div class="athlete-search">
+      <%= form_tag(athletes_path, method: :get) do %>
+      <div class="field is-grouped">
+        <%= button_tag type: 'submit', name: '', class: "button is-rounded search-submit" do %>
+        <i class="fas fa-search"></i>
+      <% end %>
+      <%= text_field_tag :search, params[:search], placeholder: ' Search by name, twitter handle, or phone', class: 'input is-rounded', style:'width: 440px' %>
+    </div>
+  <% end %>
+</div>
+<!-- </div>
+<div class="level-item has-text-centered"> -->
+<%#= link_to '#', class: 'white-link filter-toggle' do %>
+<span class="fa-stack filter-toggle">
+  <i class="fas fa-filter"></i>
+  <i class="fal fa-slash fa-1x hidden-filters" id='slashed-icon' title="Show filters" style="display:none;"></i>
+</span>
+
+<%# end %>
+</div>
+<div class="level-item has-text-centered"></div>
+</nav>
+
+
+<script type="text/javascript">
+  $( document ).ready(function() {
+    $('.add-athlete-button').click(function (e) {
+      e.preventDefault();
+      $('#new-athlete-modal').addClass('is-active');
+
+    });
+
+    $('.filter-toggle').click(function (){
+      toggle_filters();
+    });
+  });
+</script>

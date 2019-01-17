@@ -1,0 +1,6 @@
+<%= render 'email_templates/header', preview_text: 'RecruitSuite Activation Succeeded' %>
+<h2>Hello <%= @user.first_name %>,</h2>
+<p>Your RecruitSuite Account is now active.</p>
+<p>Click here to <a href='<%= @url %>'>Log in</a>.</p>
+Have a great day, and happy recruiting!
+<%= render 'email_templates/footer', fine_print: '', campaign: 'activations', campaign_content: '' %>

@@ -1,0 +1,35 @@
+.sub-nav-athletes {
+  .new-message {
+    margin-bottom: 30px;
+  }
+
+  .all-athletes {
+    margin-bottom: 30px;
+  }
+
+  .boards {
+    .private, .shared{
+      margin-bottom: 30px;
+
+      .label{
+        color: #fff;
+      }
+
+      .private-boards, .shared-boards{
+        // margin-left: 20px;
+
+        margin-bottom: 20px;
+        opacity: 0.5;
+        font-size: 0.8rem;
+
+        .level{
+          align-items: flex-start;
+        }
+
+        .filter-item{
+          padding: 5px 0px 5px 0px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  platform: one
+  platform_account_id: MyString
+  oauth_token: MyString
+  oauth_secret: MyString
+
+two:
+  user: two
+  platform: two
+  platform_account_id: MyString
+  oauth_token: MyString
+  oauth_secret: MyString

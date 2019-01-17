@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  myself: 2018-11-27 15:24:15
+  users: 2018-11-27 15:24:15
+  tweets: 2018-11-27 15:24:15
+  followers: 2018-11-27 15:24:15
+  friends: 2018-11-27 15:24:15
+  favorites: 2018-11-27 15:24:15
+
+two:
+  user: two
+  myself: 2018-11-27 15:24:15
+  users: 2018-11-27 15:24:15
+  tweets: 2018-11-27 15:24:15
+  followers: 2018-11-27 15:24:15
+  friends: 2018-11-27 15:24:15
+  favorites: 2018-11-27 15:24:15

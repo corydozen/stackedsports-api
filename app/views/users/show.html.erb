@@ -1,0 +1,20 @@
+<div class="container">
+
+
+<h1 class="title">
+  <%= "User: #{@user.first_name} #{@user.last_name}" %>
+</h1>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @user.phone %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) if !@user.is_admin? || @user.id == current_user.id %> |
+<%= link_to 'Back', users_path %>
+</div>

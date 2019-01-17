@@ -1,0 +1,21 @@
+<%= form_with(model: filter, local: true, id: 'new_filter_form') do |form| %>
+  <div class="field">
+    <%#= form.label :name, class: 'label' %>
+    <%= form.text_field :name, class: 'input', placeholder: 'Filter Name', required: true %>
+  </div>
+
+  <div class="field">
+    <div class="field">
+    <input class="is-checkradio is-info" id="is_shared" type="checkbox" name="is_shared">
+    <label for="is_shared">Share with your Team</label>
+  </div>
+  </div>
+
+  <%= form.hidden_field :filterable_type, value: filterable_type %>
+
+  <%= form.hidden_field :criteria, required: true %>
+
+  <div class="actions has-text-centered">
+    <%= form.submit 'Save Filter',  class: 'button is-info is-rounded is-outlined'%>
+  </div>
+<% end %>

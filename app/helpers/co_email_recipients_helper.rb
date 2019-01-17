@@ -1,0 +1,2 @@
+module CoEmailRecipientsHelper
+end

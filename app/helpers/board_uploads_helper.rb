@@ -1,0 +1,2 @@
+module BoardUploadsHelper
+end

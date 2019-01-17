@@ -1,0 +1,50 @@
+<div class="our-team-engagement">
+  <div class="header">
+    <div class="level">
+      <div class="level-item">
+        Our Team Engagement
+      </div>
+    </div>
+  </div>
+  <% our_engagement = AthleteReport.my_team_engagement(@athlete.athlete, current_user.teams.first.organization.id) %>
+
+  <div class="level">
+    <div class="level-item">
+      <span class="our-engagement-total"><%= our_engagement[:total] %></span>
+    </div>
+  </div>
+  <div class="level">
+    <div class="level-item total-engagement-text">
+      Total engagements with
+      <%= @athlete.first_name %>
+      from our team
+    </div>
+  </div>
+  <div class="level">
+    <div class="level-item">
+      Engagement type
+    </div>
+  </div>
+  <div class="columns has-text-centered our-engagement-details">
+    <div class="column" title="likes">
+      <%= icon('fal', 'thumbs-up') %>
+      <span class="detail"><%= our_engagement[:likes] %></span>
+    </div>
+    <div class="column" title="retweets">
+      <%= icon('fal', 'retweet') %>
+      <span class="detail"><%= our_engagement[:retweets] %></span>
+    </div>
+    <div class="column" title="mentions">
+      <%= icon('fal', 'comment-alt-dots') %>
+      <span class="detail"><%= our_engagement[:mentions] %></span>
+    </div>
+    <div class="column" title="dms">
+      <%= icon('fal', 'comment') %>
+      <span class="detail"><%= our_engagement[:dms] %></span>
+    </div>
+    <div class="column" title="sms">
+      <%= icon('fal', 'sms') %>
+      <span class="detail"><%= our_engagement[:sms] %></span>
+    </div>
+  </div>
+</div>

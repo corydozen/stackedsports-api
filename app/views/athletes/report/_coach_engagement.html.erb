@@ -1,0 +1,157 @@
+<div class="coach-engagement">
+  <% coach_engagement = AthleteReport.coach_engagement(@athlete.athlete)%>
+
+    <div class="programs">
+      <% coach_engagement.each_with_index do |ce, index| %>
+      <div class='carousel-item'>
+        <div class="level">
+          <div class="level-item index">
+            <%= "#{index + 1}." %>
+          </div>
+        </div>
+        <div class="level">
+          <div class="level-item logo">
+            <figure class="image is-96x96">
+              <%= image_tag ce[:logo], class: 'is-rounded' %>
+            </figure>
+          </div>
+        </div>
+        <div class="level">
+          <div class="level-item name">
+            <%= ce[:name] %>
+          </div>
+        </div>
+        <div class="level">
+          <div class="level-item total-engagements">
+            <%= ce[:total_engagement][:total] %>
+          </div>
+        </div>
+        <div class="level">
+          <div class="level-item total-engagements-footer">
+            Total Engagements
+          </div>
+        </div>
+        <div class="total-engagement-details">
+          <div class="columns has-text-centered">
+            <div class="column" title="likes">
+              <%= icon('fal', 'thumbs-up') %>
+              <%= ce[:total_engagement][:likes] %>
+            </div>
+            <div class="column" title="retweets">
+              <%= icon('fal', 'retweet') %>
+              <%= ce[:total_engagement][:retweets] %>
+            </div>
+            <div class="column" title="mentions">
+              <%= icon('fal', 'comment-alt-dots') %>
+              <%= ce[:total_engagement][:mentions] %>
+            </div>
+          </div>
+        </div>
+        <div class="follower-details">
+
+          <div class="level">
+            <div class="level-item">
+              <span class="following-name"><%= @athlete.first_name %>
+                is Following:</span>
+              <span class="following-link"><%= link_to "#{ce[:follower_data][:is_following].present? ? ce[:follower_data][:is_following].count : 0} accounts", '#', class: 'white-link' %></span>
+            </div>
+          </div>
+          <% if ce[:follower_data][:is_following].present? %>
+          <div class='slick-carousel following' style="display: none;">
+            <% ce[:follower_data][:is_following].each do |f| %>
+            <div class='slick-carousel-item'>
+              <div class="columns">
+                <div class="column is-2 is-offset-2">
+                  <figure class="image is-48x48">
+                    <%= image_tag f[:profile_image], class: 'is-rounded' %>
+                  </figure>
+                </div>
+                <div class="column">
+                  <%= f[:coach_name] %>
+                  <br>
+                  <%= "@#{f[:screen_name]}" %>
+                </div>
+              </div>
+            </div>
+            <% end %>
+          </div>
+          <% end %>
+          <div class="level">
+            <div class="level-item">
+              <spaan class="follower-name"><%= @athlete.first_name %>
+                is Followed by:</span>
+              <span class="followers-link"><%= link_to "#{ce[:follower_data][:is_followed_by].present? ? ce[:follower_data][:is_followed_by].count : 0} accounts", '#', class: 'white-link' %></span>
+            </div>
+          </div>
+          <% if ce[:follower_data][:is_followed_by].present? %>
+          <div class='slick-carousel followers' style="display: none;">
+            <% ce[:follower_data][:is_followed_by].each do |f| %>
+            <div class='slick-carousel-item'>
+              <div class="columns">
+                <div class="column is-2 is-offset-2">
+                  <figure class="image is-48x48">
+                    <%= image_tag f[:profile_image], class: 'is-rounded' %>
+                  </figure>
+                </div>
+                <div class="column">
+                  <%= f[:coach_name] %>
+                  <br>
+                  <%= "@#{f[:screen_name]}" %>
+                </div>
+              </div>
+            </div>
+            <% end %>
+          </div>
+          <% end %>
+        </div>
+        <!-- <div class="level">
+          <div class="level-item">
+            <%= link_to 'View Details', '#', class: 'white-link view-engagement-details' %>
+          </div>
+        </div> -->
+      </div>
+    <% end %>
+  </div>
+</div>
+
+  <script type="text/javascript">
+    $( document ).ready(function() {
+      // var carousels = bulmaCarousel.attach();
+      $('.programs').slick(
+        {infinite: true, slidesToShow: <%= items %>, slidesToScroll: <%= items %>, prevArrow: '<button class="slick-prev prev-program" aria-label="Previous" type="button">Previous</button>', nextArrow: '<button class="slick-next next-program" aria-label="Next" type="button">Next</button>'}
+      );
+      initSlick(".following", 'following');
+      initSlick(".followers", 'follower');
+
+      $('.following-link').click(function (e) {
+        e.preventDefault();
+        var following = $(this).parents().siblings('.following');
+        following.toggle();
+        following.slick('unslick');
+        initSlick(following, 'following');
+      });
+
+      $('.followers-link').click(function (e) {
+        e.preventDefault();
+        var followers = $(this).parents().siblings('.followers');
+        followers.toggle();
+        followers.slick('unslick');
+        initSlick(followers, 'follower');
+      });
+
+      $('.view-engagement-details').click(function(e){
+        e.preventDefault();
+        // TODO: make the view details expand the engagement secction
+      });
+    });
+
+    var initSlick = function (elem, arrowClass) {
+      $(elem).slick({
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        prevArrow: '<button class="slick-prev prev-' + arrowClass + '" aria-label="Previous" type="button">Previous</button>',
+        nextArrow: '<button class="slick-next next-' + arrowClass + '" aria-label="Next" type="button">Next</button>'
+      });
+    };
+  </script>

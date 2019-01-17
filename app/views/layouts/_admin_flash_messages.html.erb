@@ -1,0 +1,25 @@
+<div class="admin_flashes">
+
+  <% flash.each do |key, value| %>
+    <div class="notification <%= flash_class(key) %>">
+      <%= value %>
+      <progress class="progress <%= flash_class(key) %>" style="filter: brightness(85%);" value="5000" max="5000"></progress>
+    </div>
+  <% end %>
+
+</div>
+
+<script type="text/javascript">
+  $( document ).ready(function() {
+
+    function removeFillProgress() {
+      $('.notification.progress').animate({
+        width: 'toggle'
+      }, 5001);
+    }
+
+    removeFillProgress();
+
+    $(".notification").delay(5000).fadeOut(500);
+  });
+</script>

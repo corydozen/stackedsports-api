@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  program_name: MyString
+  recruit_name: MyString
+  position: MyString
+  grad_year: MyString
+  high_school: MyString
+  state: MyString
+  twitter_handle: MyString
+  tweet_text: MyString
+  tweet_permalink: MyString
+  deleted: false
+
+two:
+  program_name: MyString
+  recruit_name: MyString
+  position: MyString
+  grad_year: MyString
+  high_school: MyString
+  state: MyString
+  twitter_handle: MyString
+  tweet_text: MyString
+  tweet_permalink: MyString
+  deleted: false

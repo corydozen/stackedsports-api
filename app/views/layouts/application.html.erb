@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+  <html class="<%= current_user && is_admin_page ? 'has-navbar-fixed-top' : '' %>">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Recruit Suite</title>
+      <%= csrf_meta_tags %>
+      <%= csp_meta_tag %>
+<!-- , 'data-turbolinks-track': 'reload' -->
+      <%= stylesheet_link_tag 'application', media: 'all' %>
+      <%= javascript_include_tag 'application' %>
+      <%= render 'layouts/favicon' %>
+      <% if content_for?(:head) %>
+        <%= yield(:head) %>
+      <% end %>
+    </head>
+
+    <body>
+      <%= render 'layouts/admin_nav' if current_user && is_admin_page %>
+      <div class="columns is-marginless is-fullheight">
+        <% if current_user && !is_admin_page %>
+          <div class="column is-2 is-narrow is-sidebar-menu is-hidden-mobile">
+            <%= render 'layouts/user_nav/nav' %>
+          </div>
+        <% end %>
+
+      <div class="column is-paddingless is-main-content <%= is_admin_page ? 'admin' : '' %> <%= is_login_page ? 'login' : '' %>">
+        <%= render 'layouts/flash_messages' %>
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>

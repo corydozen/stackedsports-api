@@ -1,0 +1,39 @@
+<div class="container">
+  <h1 class="title">Conferences</h1>
+  <div class="level">
+    <div class="level-left">
+      <%= link_to 'Add Conference', new_conference_path, class: 'button is-primary is-outlined' %>
+    </div>
+  </div>
+
+  <div class="content">
+    <table class="table  is-striped is-narrow is-hoverable">
+      <sup>*Conferences with a sort of 999999 will be sorted by name when rendered</sup>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>In Power 5</th>
+          <th>Default Sort*</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @conferences.each do |conference| %>
+          <tr>
+            <td><%= conference.name %></td>
+            <td><%= conference.is_power_five %></td>
+            <td><%= conference.sort %></td>
+
+            <td><%= link_to 'Edit', edit_conference_path(conference) %></td>
+            <td><%= link_to 'Destroy', conference, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td>
+              <button data-show="quickview" data-target="quickviewDefault" type="button" name="button" class="button is-small is-info is-outlined">View Organizations</button>
+
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

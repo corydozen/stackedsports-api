@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @position.name %>
+</p>
+
+<p>
+  <strong>Abbreviation:</strong>
+  <%= @position.abbreviation %>
+</p>
+
+<p>
+  <strong>Standardized name:</strong>
+  <%= @position.standardized_name %>
+</p>
+
+<p>
+  <strong>Role:</strong>
+  <%= @position.role %>
+</p>
+
+<p>
+  <strong>Alternate names:</strong>
+  <%= @position.alternate_names %>
+</p>
+
+<%= link_to 'Edit', edit_position_path(@position) %> |
+<%= link_to 'Back', positions_path %>

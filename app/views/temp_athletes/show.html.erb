@@ -1,0 +1,153 @@
+<p id="notice"><%= notice %></p>
+<div class="container show">
+  <%= link_to 'Back to Temp Athletes List', temp_athletes_path %>
+  <div class="columns">
+    <div class="column is-one-quarter profile">
+      <h1 class="title">
+        Athlete:
+        <br>
+        <%= "#{@temp_athlete.first_name} #{@temp_athlete.last_name}" %>
+      </h1>
+
+      <p>
+        <strong>Grad Year:</strong>
+        <%= @temp_athlete.grad_year %>
+      </p>
+
+      <p>
+        <strong>High School Name:</strong>
+        <%= @temp_athlete.hs_name %>
+      </p>
+
+      <p>
+        <strong>High School State:</strong>
+        <%= @temp_athlete.hs_state %>
+      </p>
+
+      <p>
+        <strong>Positions:</strong>
+        <%= @temp_athlete.positions %>
+      </p>
+
+      <p>
+        <strong>Address:</strong>
+        <%= @temp_athlete.address %>
+      </p>
+
+      <p>
+        <strong>City:</strong>
+        <%= @temp_athlete.city %>
+      </p>
+      <p>
+        <strong>State:</strong>
+        <%= @temp_athlete.state %>
+      </p>
+
+      <p>
+        <strong>Zip Code:</strong>
+        <%= @temp_athlete.zip_code %>
+      </p>
+
+      <p>
+        <strong>Mobile:</strong>
+        <%= @temp_athlete.mobile %>
+      </p>
+
+      <p>
+        <strong>Email:</strong>
+        <%= @temp_athlete.email %>
+      </p>
+
+      <%= link_to 'Edit', edit_temp_athlete_path(@temp_athlete), class:'button is-primary is-outlined' %>
+    </div>
+    <div class="column twitter">
+      <h1 class="title">Twitter Profile</h1>
+      <div class="twitter-profile">
+        <div class="columns">
+          <div class="column is-one-quarter">
+            <figure class="image is-128x128 profile-pic">
+              <img class="is-rounded" src="<%= @temp_athlete.twitter_profile.profile_image_url_https.gsub('_normal', '') %>" alt="">
+            </figure>
+          </div>
+          <div class="column">
+            <div class="twitter_handle">
+              Twitter Handle:
+              <a href="<%= @temp_athlete.twitter_profile.url %>" target="_blank">
+                <%= "@#{@temp_athlete.twitter_profile.screen_name}" %>
+              </a>
+            </div>
+            <% if @temp_athlete.twitter_profile.location.present? %>
+            <div class="location">
+              Location: <%= @temp_athlete.twitter_profile.location %>
+            </div>
+            <% end %>
+
+            <div class="description">
+              <%= @temp_athlete.twitter_profile.description %>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <h1 class="title">Tweets</h1>
+      <div class="columns is-mobile is-multiline tweets">
+
+        <% @temp_athlete.twitter_profile.tweets.order(created_at: :desc).each do |tweet| %>
+          <div class="column tweet" style="">
+            <article class="media">
+              <div class="media-left">
+                <div class="image is-128x128">
+                  <%
+                    if tweet.media.present? #&& tweet.media.starts_with?('[')
+                      media_object = JSON.parse(tweet.media.gsub('nil', 'null').gsub(/:([a-zA-z]+)/,'"\\1"').gsub('=>', ': ')).first
+                    end
+                  %>
+                    <% if media_object.present? %>
+                      <% if media_object['type'] == 'photo' || media_object['type'] == 'gif'%>
+                        <img style="max-height: 100%;" src="<%= media_object['media_url_https'] %>">
+                      <% end %>
+                      <% if media_object['type'] == 'video' %>
+                        <video style="max-height: 100%;" src="<%= media_object['video_info']['variants'].first['url'] %>" controls="controls" poster="<%= media_object['media_url_https'] %>"></video>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="media-content">
+                  <div class="content">
+                    <p>
+                      <small>Tweeted: <%= local_time_ago(tweet.created_at) %></small>
+                      <br>
+                      <%= auto_link(tweet.text) %>
+                    </p>
+                  </div>
+                  <nav class="level is-mobile">
+                    <div class="level-left">
+                      <a style="margin-right: 20px;" class="level-item" href='<%= "https://twitter.com/#{@temp_athlete.twitter_profile.screen_name}/status/#{tweet.id}" %>' target="_blank">
+                        <span class="icon is-small">
+                          <i class="fab fa-twitter"></i>
+                        </span>
+                      </a>
+                      <a style="margin-right: 20px;" class="level-item">
+                        <span class="icon is-small">
+                          <i class="fas fa-retweet"></i>
+                          <%= tweet.retweet_count %>
+                        </span>
+                      </a>
+                      <a class="level-item">
+                        <span class="icon is-small">
+                          <i class="fas fa-heart"></i>
+                          <%= tweet.favorite_count %>
+                        </span>
+                      </a>
+                    </div>
+                  </nav>
+                </div>
+                <!-- <div class="media-right"> <button class="delete"></button> </div> -->
+              </article>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+  </div>

@@ -1,0 +1,22 @@
+<div class="columns is-centered" title="<%= msg['created_at'] %>">
+  <!-- <div class="column is-2">
+
+  </div> -->
+  <div class="column is-8 outbound-message">
+    <div class="has-text-right message-text">
+      <%= msg['text'] if msg['text'].present? %>
+    </div>
+    <br>
+    <div class="message-media">
+      <%= msg['media'] if msg['media'].present? %>
+    </div>
+  </div>
+  <div class="column is-2 profile-image">
+    <%= image_tag profile_image %>
+    <% if msg['message_type'] == 'sms' %>
+      <%= icon('fas', 'phone', class: 'fa-lg', title: '') %>
+    <% else %>
+      <%= icon('fab', 'twitter', class: 'fa-lg', title: '') %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<%= form_with(model: co_email_grouping, local: true) do |form| %>
+  <% if co_email_grouping.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(co_email_grouping.errors.count, "error") %> prohibited this co_email_grouping from being saved:</h2>
+
+      <ul>
+      <% co_email_grouping.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :description, class: 'label'%>
+    <%= form.text_field :description, class: 'input' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: 'button is-primray'%>
+  </div>
+<% end %>

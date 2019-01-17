@@ -1,0 +1,16 @@
+<% ['57x57', '60x60', '72x72', '76x76', '114x114', '120x120', '144x144', '152x152', '180x180'].each do |size| %>
+  <%= favicon_link_tag "apple-icon-#{size}.png", rel: "apple-touch-icon", type: "image/png", sizes: "#{size}" %>
+<% end %>
+
+<%= favicon_link_tag 'android-icon-192x192.png', rel: "icon", type: "image/png", sizes: "192x192" %>
+
+<% ['32x32', '96x96', '16x16'].each do |size| %>
+  <%= favicon_link_tag "favicon-#{size}.png", rel: "icon", type: "image/png", sizes: "#{size}" %>
+<% end %>
+
+<%= favicon_link_tag "manifest.json", rel: "manifest", type: "json" %>
+<meta name="msapplication-TileColor" content="#ffffff">
+<% ['70x70', '144x144', '150x150', '310x310'].each do |size| %>
+  <meta name="msapplication-TileImage" content="/ms-icon-<%= size %>.png">
+<% end %>
+<meta name="theme-color" content="#ffffff">

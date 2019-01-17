@@ -1,0 +1,123 @@
+<% settings = CoEmailSetting.first %>
+
+<%= render 'email_templates/header', preview_text: 'Recruit Suite Daily Offer & Commit Tweets' %>
+<%= render 'email_templates/mso_table_wrapper_above' %>
+<table cellpadding="0" cellspacing="0" border="0" style="<%= render 'email_templates/table_style' %> width:100%;">
+  <tr>
+    <td>
+      <div style="padding: 20px 20px 50px 20px">
+        <h2 style="text-alignment:center;">Daily Offer & Commit Tweets</h2>
+        <% today = DateTime.yesterday.to_date %>
+        <h3>From
+          <%= today.strftime("%B #{today.day.ordinalize}, %Y") %>
+        </h3>
+        <p>
+          <%= greeting %>!
+          <br>
+          <%= auto_link(raw settings.header_text) %>
+        </p>
+      </div>
+    </td>
+  </tr>
+</table>
+<%= render 'email_templates/mso_table_wrapper_below' %>
+
+<% valid_records = TempCommitOffer.where(deleted: false, sent_on: nil) %>
+<% conferences = Conference.where(football_subdivision: 'FBS').order(:sort).pluck(:name) %>
+<% commits = valid_records.where(grouping: 'Commit Tweets') %>
+<% offers = valid_records.where(grouping: 'Offer Tweets') %>
+<% others = valid_records.where(grouping: 'Other Commitments') %>
+
+<%= render 'commit_offer_mailer/section_header', header: 'OFFER / COMMIT SUMMARY', width: 350 %>
+<%= render 'commit_offer_mailer/section_program_co_summary', records: valid_records, conferences: conferences, offers: offers, commits: commits, others: others %>
+
+<% if commits.present? %>
+<%= render 'commit_offer_mailer/section_header', header: 'COMMIT TWEETS', width: 250 %>
+<%= render 'email_templates/mso_table_wrapper_above' %>
+<table cellpadding="0" cellspacing="0" border="0" style="<%= render 'email_templates/table_style' %>width:100%;">
+  <% conferences.each do |conference| %>
+    <% commits_by_conference = commits.where(conference: conference) %>
+    <% next unless commits_by_conference.present? %>
+    <%= render 'commit_offer_mailer/section_conference', conference: conference %>
+    <% commits_by_conference.each do |commit| %>
+      <%= render 'commit_offer_mailer/section_card', co_data: commit, program_label: 'Commited to' %>
+    <% end %>
+  <% end %>
+</table>
+<%= render 'email_templates/mso_table_wrapper_below' %>
+<% end %>
+
+<% if offers.present? %>
+<%= render 'commit_offer_mailer/section_header', header: 'OFFER TWEETS', width: 250 %>
+<%= render 'email_templates/mso_table_wrapper_above' %>
+<table cellpadding="0" cellspacing="0" border="0" style="<%= render 'email_templates/table_style' %>width:100%;">
+  <% conferences.each do |conference| %>
+    <% offers_by_conference = offers.where(conference: conference) %>
+    <% next unless offers_by_conference.present? %>
+    <%= render 'commit_offer_mailer/section_conference', conference: conference %>
+    <% offers_by_conference.each do |offer| %>
+      <%= render 'commit_offer_mailer/section_card', co_data: offer, program_label: 'Offered by' %>
+    <% end %>
+  <% end %>
+</table>
+<%= render 'email_templates/mso_table_wrapper_below' %>
+<% end %>
+
+<% if others.present? %>
+
+<%= render 'commit_offer_mailer/section_header', header: 'OTHER OFFERS & COMMITMENTS', width: 400 %>
+<%= render 'email_templates/mso_table_wrapper_above' %>
+<table cellpadding="0" cellspacing="0" border="0" style="<%= render 'email_templates/table_style' %>width:100%;">
+
+  <% conferences.each do |conference| %>
+    <% others_by_conference = others.where(conference: conference) %>
+    <% next unless others_by_conference.present? %>
+    <%= render 'commit_offer_mailer/section_conference', conference: conference %>
+    <% others_by_conference.each do |other| %>
+      <%= render 'commit_offer_mailer/section_card', co_data: other, program_label: 'Other Offers & Commitments' %>
+    <% end %>
+  <% end %>
+  <% others_without_conference = others.where(conference: '').or(others.where(conference: nil)) %>
+  <% others_without_conference.each do |other_woc| %>
+    <%= render 'commit_offer_mailer/section_card', co_data: other_woc, program_label: 'Other Offers & Commitments' %>
+  <% end if others_without_conference.present?%>
+</table>
+<%= render 'email_templates/mso_table_wrapper_below' %>
+<% end %>
+
+
+<%= render 'email_templates/mso_table_wrapper_above' %>
+<table cellpadding="0" cellspacing="0" border="0" style="<%= render 'email_templates/table_style' %>width:100%;">
+  <tr>
+    <td>
+      <div class="help-section">
+
+        <h3 style="color: #959595; padding: 25px 0px 0px 0px;">
+          <strong>How can RecruitSuite help me?</strong>
+        </h3>
+        <p style="line-height: 35px;">
+          <strong>
+            RecruitSuite is the most efficient tool for recruiting on social media. The only recruiting software that combines your social media communication, social data analytics, and social media content strategies in one tool. Complete the "Request A Demo"
+            form found using the button below and we will personally show you how RecruitSuite can improve your social media strategy.
+          </strong>
+        </p>
+
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" style=" ">
+          <tr>
+            <td></td>
+            <td align="center" valign="middle" width="33%" style=" border:2px solid #25313D; border-radius:5px; color:#FFFFFF; font-family:Helvetica, Arial, sans-serif; font-size:16px; font-weight:bold; letter-spacing:-.5px; line-height:150%; padding:15px 30px 15px 30px;">
+              <a href="http://stackedsports.com/schedule-a-demo/" target="_blank" style="color:#25313D; text-decoration:none;">
+                Request a demo
+              </a>
+            </td>
+            <td></td>
+          </tr>
+        </table>
+      </div>
+
+    </td>
+  </tr>
+</table>
+<%= render 'email_templates/mso_table_wrapper_below' %>
+
+<%= render 'email_templates/footer', fine_print: '', campaign: 'daily_offer_commits_email', campaign_content: '' %>

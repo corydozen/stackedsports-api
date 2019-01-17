@@ -1,0 +1,36 @@
+<div class="column is-4 is-fullheight is-light-background">
+  <%= render 'layouts/user_nav/sub_nav_toggle' %>
+  <input type="text" placeholder="Search" class="input is-rounded">
+
+  <% @inbox.each do |message| %>
+    <%= link_to("/conversation/#{message['team_athlete_id']}") do %>
+      <div class="card card-message is-primary-background" style="margin-top: 1rem;">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <img src=<%= message[:profile_image] %> class="message-profile-image" />
+            </div>
+            <div class="media-content">
+              <p class="title is-6 has-text-white">
+                <%= "#{message['first_name']} #{message['last_name']}" %>
+              </p>
+              <% if message['message_type'] == "sms" %>
+                <p class="subtitle is-7 has-text-grey">SMS message</p>
+              <% end %>
+            </div>
+            <div class="media-right">
+              <span class="is-size-7 has-text-grey">
+                <%= message['last_received_time'] %>
+              </span>
+            </div>
+          </div>
+          <div class="content">
+            <span class="is-size-7 has-text-grey-light">
+              <%= message[:last_message_preview] %>
+            </span>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

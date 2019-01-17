@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+<div class="container">
+
+  <h1 class="title">Co Email Groupings</h1>
+  <%= link_to 'New Co Email Grouping', new_co_email_grouping_path, class:'button is-primary' %>
+  <table class="table">
+    <thead >
+      <tr>
+        <th>Description</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @co_email_groupings.each do |co_email_grouping| %>
+        <tr>
+          <td><%= co_email_grouping.description %></td>
+          <td><%= link_to 'Edit', edit_co_email_grouping_path(co_email_grouping) %></td>
+          <td><%= link_to 'Destroy', co_email_grouping, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end if @co_email_groupings%>
+    </tbody>
+  </table>
+
+</div>
